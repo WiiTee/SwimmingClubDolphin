@@ -1,0 +1,60 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.*;
+
+//Disse metoder er beregnet til at læse bogsstavsData og ikke binær data. Derfor bruger du BufferedReader, og FileReader
+//Hvis du indlæste filer med binær data, så ville du bruge FileInputStream(Læser rå bytes), BufferedInputStream(Giver FileInputStream buffering.
+
+//.txt, .csv, .json filer rummer bogsstavsData - TekstFiler
+//.jpg, .pdf, .mp3, .exe rummer binær data og eksisterer i binært format. Skal afkodes af et program.
+
+
+public class CSVFileReader {
+
+    private String fileName;
+    private List<String[]> data;
+
+    public CSVDataManager(String fileName) {
+        this.fileName = fileName;
+        this.data = new ArrayList<>();
+    }
+
+    public void loadData() {
+        data.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null)) {
+                String[] row = line.split(",");
+                data.add(row);
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    //Getter for data List
+    public List<String[]> getdata() {
+        return data;
+    }
+    public void updateData(List<String[]> newData) {
+        this.data = newData;
+    }
+    public void saveData() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (String[] row : data) {
+                writer.write(String.join(",", row));
+                writer.newLine;
+            }
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
