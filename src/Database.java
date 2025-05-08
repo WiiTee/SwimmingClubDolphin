@@ -6,19 +6,24 @@ import java.util.Arrays;
 
 public class Database {
 
-    public ArrayList<Object> read(String fileName) throws IOException {
-
+    private String fileIOSetup(String fileName) {
         String path = System.getProperty("user.dir");
-        String data_dir = path+"\\data\\"+fileName;
-        File yourFile = new File(data_dir);
+        String dataDir = path+"\\data\\"+fileName;
+        File yourFile = new File(dataDir);
         try {
             yourFile.createNewFile(); // if file already exists will do nothing
         } catch (IOException e) {
             throw new RuntimeException(e);
         };
+        return dataDir;
+    }
+
+    public ArrayList<Object> read(String fileName) throws IOException {
+
+        String dataDir = fileIOSetup(fileName);
 
         ArrayList<Object> records = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(data_dir))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(dataDir))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -34,16 +39,9 @@ public class Database {
     }
 
     public void write(ArrayList<Object> records, String fileName) throws IOException {
-        String path = System.getProperty("user.dir");
-        String data_dir = path+"\\data\\"+fileName;
-        File yourFile = new File(data_dir);
-        try {
-            yourFile.createNewFile(); // if file already exists will do nothing
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        };
+        String dataDir = fileIOSetup(fileName);
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(data_dir, true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(dataDir, true));
         for (Object record : records) {
             writer.append("\n").append(record.toString());
         }
