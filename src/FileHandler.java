@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Database {
+public class FileHandler {
 
     /**
      * Sets up a file in the 'data' subdirectory of the current working directory.
@@ -149,8 +149,8 @@ public class Database {
 /*
 READ EXAMPLE USAGE:
 
-    Database db = new Database();
-    String data_dir = "Database.csv";
+    FileHandler db = new FileHandler();
+    String data_dir = "FileHandler.csv";
     ArrayList<Object> out = db.read(data_dir);
 
 
@@ -175,6 +175,6 @@ WRITE EXAMPLE USAGE:
     records.add(record2);
 
     System.out.println(records);
-    db.write(records, "Database.csv");
+    db.write(records, "FileHandler.csv");
 
 */
