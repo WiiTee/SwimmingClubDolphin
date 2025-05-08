@@ -18,7 +18,7 @@ public class Database {
         return dataDir;
     }
 
-    public ArrayList<Object> read(String fileName) throws IOException {
+    public ArrayList<Object> read(String fileName) {
 
         String dataDir = fileIOSetup(fileName);
 
@@ -29,8 +29,6 @@ public class Database {
                 String[] values = line.split(",");
                 records.add(Arrays.asList(values));
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -38,15 +36,18 @@ public class Database {
 
     }
 
-    public void write(ArrayList<Object> records, String fileName) throws IOException {
+    public void write(ArrayList<Object> records, String fileName) {
         String dataDir = fileIOSetup(fileName);
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(dataDir, true));
-        for (Object record : records) {
-            writer.append("\n").append(record.toString());
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(dataDir, true));
+            for (Object record : records) {
+                writer.append("\n").append(record.toString());
+            }
+            writer.close();
+        }catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
-        writer.close();
     }
 }
 
