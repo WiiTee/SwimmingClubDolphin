@@ -70,7 +70,7 @@ public class FileHandler {
      *           <li>Malformed path</li>
      *         </ul>
      */
-    public ArrayList<Object> read(String fileName) {
+    public ArrayList<Object> load(String fileName) {
         // Verify/Create file and get full path using fileIOSetup utility
         String dataDir = fileIOSetup(fileName);
 
@@ -91,7 +91,7 @@ public class FileHandler {
             }
         } catch (IOException e) {
             // Wrap checked exception with context about failure
-            throw new RuntimeException("Failed to read file: " + dataDir, e);
+            throw new RuntimeException("Failed to load file: " + dataDir, e);
         }
 
         return records;
@@ -122,7 +122,7 @@ public class FileHandler {
      *           <li>Disk full condition</li>
      *         </ul>
      */
-    public void write(ArrayList<Object> records, String fileName) {
+    public void save(ArrayList<Object> records, String fileName) {
         // Get verified file path using fileIOSetup utility
         String dataDir = fileIOSetup(fileName);
 
@@ -140,7 +140,7 @@ public class FileHandler {
             writer.close();
         } catch (IOException e) {
             // Wrap exception with context about failure
-            throw new RuntimeException("Failed to write to file: " + dataDir, e);
+            throw new RuntimeException("Failed to save to file: " + dataDir, e);
         }
     }
 }
@@ -151,7 +151,7 @@ READ EXAMPLE USAGE:
 
     FileHandler db = new FileHandler();
     String data_dir = "FileHandler.csv";
-    ArrayList<Object> out = db.read(data_dir);
+    ArrayList<Object> out = db.load(data_dir);
 
 
 WRITE EXAMPLE USAGE:
@@ -175,6 +175,6 @@ WRITE EXAMPLE USAGE:
     records.add(record2);
 
     System.out.println(records);
-    db.write(records, "FileHandler.csv");
+    db.save(records, "FileHandler.csv");
 
 */
