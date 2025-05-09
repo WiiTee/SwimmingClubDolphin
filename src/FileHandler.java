@@ -21,13 +21,13 @@ public class FileHandler {
      * @throws RuntimeException if an I/O error occurs during file creation, including cases
      *         where parent directories are missing or permissions are insufficient.
      */
-    private String fileIOSetup(String fileName) {
+    public String fileIOSetup(String fileName) {
         // Get the current working directory of the application
         String path = System.getProperty("user.dir");
 
         // Construct the full path to the target file in the data subdirectory
         // Use static constant "File.separator" to ensure cross-platform compatibility
-        String dataDir = path + File.separator + "data" + fileName;
+        String dataDir = path + File.separator + "data"+ File.separator + fileName;
 
         // Create a File object representing the target file
         File yourFile = new File(dataDir);
