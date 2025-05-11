@@ -2,11 +2,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import utils.FileHandler;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,7 +51,8 @@ class FileHandlerTest {
     @Test
     void testSave(){
         var fh = new FileHandler();
-        var mockOut = new ArrayList<Object>();
+        var mockOut = new ArrayList<String[]>();
+        System.out.println(Arrays.toString(mockRecord));
         mockOut.add(mockRecord);
         fh.save(mockOut,fileName);
     }

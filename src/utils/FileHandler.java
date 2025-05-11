@@ -1,3 +1,5 @@
+package utils;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,12 +70,12 @@ public class FileHandler {
      *           <li>Malformed path</li>
      *         </ul>
      */
-    public ArrayList<Object> load(String fileName) {
+    public ArrayList<String[]> load(String fileName) {
         // Verify/Create file and get full path using fileIOSetup utility
         String dataDir = fileIOSetup(fileName);
 
         // Initialize collection to store parsed records
-        ArrayList<Object> records = new ArrayList<>();
+        ArrayList<String[]> records = new ArrayList<>();
 
         // Try-with-resources ensures BufferedReader is auto-closed
         try (BufferedReader br = new BufferedReader(new FileReader(dataDir))) {
@@ -83,9 +85,8 @@ public class FileHandler {
             while ((line = br.readLine()) != null) {
                 // Split line into string array using comma delimiter
                 String[] values = line.split(",");
-
                 // Convert array to List and add to records collection
-                records.add(Arrays.asList(values));
+                records.add(values);
             }
         } catch (IOException e) {
             // Wrap checked exception with context about failure
@@ -120,7 +121,7 @@ public class FileHandler {
      *           <li>Disk full condition</li>
      *         </ul>
      */
-    public void save(ArrayList<Object> records, String fileName) {
+    public void save(ArrayList<String[]> records, String fileName) {
         // Get verified file path using fileIOSetup utility
         String dataDir = fileIOSetup(fileName);
 
@@ -129,9 +130,9 @@ public class FileHandler {
             BufferedWriter writer = new BufferedWriter(new FileWriter(dataDir, true));
 
             // Write each record with leading newline
-            for (Object record : records) {
+            for (String[] record : records) {
                 // Convert object to string and prepend newline
-                writer.append("\n").append(record.toString());
+                writer.append("\n").append(String.join(",",record));
             }
 
             // Explicitly close writer to flush buffers
