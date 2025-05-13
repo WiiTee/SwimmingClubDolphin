@@ -9,6 +9,9 @@ public class Trainer extends Person{
         super(firstName, lastName, phoneNumber);
         super.constructID(firstName, lastName);
         this.trainerID = super.constructAccessID();
+    }
 
+    public String getTrainerID() {
+        return trainerID;
     }
 }

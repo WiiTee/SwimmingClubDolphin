@@ -1,4 +1,4 @@
-package lib.CompetitiveSwimming;
+package lib.compswim;
 
 import lib.persons.Member;
 import lib.persons.Trainer;
