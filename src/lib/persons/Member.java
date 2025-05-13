@@ -7,7 +7,7 @@ import lib.Membership.Payment;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Member {
+public class Member extends Person {
     private Membership membership;
     private Team team;
     private String address;
@@ -17,14 +17,18 @@ public class Member {
     //private ArrayList<Training> trainingPerformance;
     //private ArrayList<Competition> competitionPerformance;
 
-    public Member(Membership membership, String address, LocalDate age, Payment payment){
+    public Member(String firstName, String lastName, int phoneNumber, Membership membership, String address, LocalDate age, Payment payment){
+        super(firstName, lastName, phoneNumber);
+        super.constructID(firstName, lastName);
         this.membership = membership;
         this.address = address;
         this.age = age;
         this.payment = payment;
     }
 
-    public Member(Membership membership, Team team,  String address, LocalDate age, Payment payment, ArrayList<String> disciplines){
+    public Member(String firstName, String lastName, int phoneNumber, Membership membership, Team team,  String address, LocalDate age, Payment payment, ArrayList<String> disciplines){
+        super(firstName, lastName, phoneNumber);
+        super.constructID(firstName, lastName);
         this.membership = membership;
         this.team = team;
         this.address = address;
