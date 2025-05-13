@@ -17,12 +17,15 @@ public class Person {
         this.id = constructID(firstName, lastName);
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String constructID(String firstName, String lastName){
         String subFirst = firstName.substring(0, 2);
         String subLast = lastName.substring(0, 2);
 
         Random ran = new Random();
-
         int conInt = ran.nextInt(1000, 9999);
         String convertInt = String.valueOf(conInt);
 
@@ -33,7 +36,6 @@ public class Person {
 
     public String constructAccessID(){
         String constructID;
-
         return constructID = UUID.randomUUID().toString();
     }
 }
