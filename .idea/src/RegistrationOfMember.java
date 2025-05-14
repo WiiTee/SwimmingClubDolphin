@@ -3,11 +3,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RegistrationOfMember {
+    Scanner sc = new Scanner(System.in);
+    ArrayList<Person> members = new ArrayList<>();
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Person> member = new ArrayList<>();
-
+    public void run() {
         boolean runProgram = true;
 
         while (runProgram) {
@@ -20,28 +19,26 @@ public class RegistrationOfMember {
 
             switch (choice) {
                 case "1":
-                    registerMember(member, sc);
+                    registerMember();
                     break;
                 case "2":
-                    showMembers(member);
+                    showMembers();
                     break;
                 case "3":
-                    removeMember(member, sc);
+                    removeMember();
                     break;
                 case "4":
                     runProgram = false;
                     System.out.println("The program has ended.");
                     break;
                 default:
-                    System.out.println("Ugyldigt valg. Try again.");
+                    System.out.println("Invalid choice. Try again.");
             }
         }
-
         sc.close();
     }
 
-    public static void registerMember(ArrayList<Person> member, Scanner sc) {
-
+    public void registerMember() {
         System.out.println("Enter your first name: ");
         String firstName = sc.nextLine();
 
@@ -57,31 +54,31 @@ public class RegistrationOfMember {
         System.out.println("Enter your address: ");
         String address = sc.nextLine();
 
-        Person members = new Person(firstName, lastName, birthDate, phoneNo, address);
-        member.add(members);
+        Person newMember = new Person(firstName, lastName, birthDate, phoneNo, address);
+        members.add(newMember);
 
-        System.out.println("Member registrered with ID: " + members.getId());
+        System.out.println("Member registered with ID: " + newMember.getId());
     }
 
-    public static void showMembers(ArrayList<Person> member) {
-        if (member.isEmpty()) {
+    public void showMembers() {
+        if (members.isEmpty()) {
             System.out.println("No registered members yet.");
         } else {
             System.out.println("\nRegistered members:");
-            for (Person members : member) {
-                System.out.println(members);
+            for (Person m : members) {
+                System.out.println(m);
             }
         }
     }
 
-    public static void removeMember(ArrayList<Person> member, Scanner sc) {
+    public void removeMember() {
         System.out.println("Enter the ID of the member to remove:");
         int removeID = Integer.parseInt(sc.nextLine());
         boolean removed = false;
 
-        for (int i = 0; i < member.size(); i++) {
-            if (member.get(i).getId() == removeID) {
-                member.remove(i);
+        for (int i = 0; i < members.size(); i++) {
+            if (members.get(i).getId() == removeID) {
+                members.remove(i);
                 System.out.println("Member with ID " + removeID + " has been removed.");
                 removed = true;
                 break;
@@ -92,4 +89,11 @@ public class RegistrationOfMember {
             System.out.println("No member found with that ID.");
         }
     }
+
+    public static void main(String[] args) {
+        RegistrationOfMember program = new RegistrationOfMember();
+        program.run();
+    }
 }
+
+
