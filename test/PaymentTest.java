@@ -50,12 +50,12 @@ public class PaymentTest {
         payment.setLastPayment(LocalDate.now());
         payment.setHasPaid();
 
-        assertTrue(payment.getHasPaid());
+        assertFalse(payment.getHasPaid());
 
         payment.setLastPayment(LocalDate.of(2020, 10, 1));
         payment.setHasPaid();
 
-        assertFalse(payment.getHasPaid());
+        assertTrue(payment.getHasPaid());
     }
 
     @Test

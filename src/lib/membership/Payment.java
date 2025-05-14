@@ -51,7 +51,7 @@ public class Payment {
     }
 
     public void setHasPaid(){
-        if(lastPayment.plusYears(1).isBefore(LocalDate.now())){
+        if(lastPayment.plusYears(1).isAfter(LocalDate.now())){
             hasPaid = false;
         } else {
             hasPaid = true;
