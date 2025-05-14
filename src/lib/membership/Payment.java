@@ -1,0 +1,64 @@
+package lib.membership;
+
+import lib.persons.Member;
+
+import java.time.LocalDate;
+import java.time.Period;
+
+public class Payment {
+    private LocalDate subscriptionDate;
+    private LocalDate lastPayment;
+    private double paymentAmount;
+    private boolean hasPaid;
+
+    public Payment(LocalDate subscriptionDate, LocalDate age){
+        this.subscriptionDate = subscriptionDate;
+        this.lastPayment = subscriptionDate;
+        this.paymentAmount = paymentSelector(age);
+        this.hasPaid = true;
+    }
+
+    public double getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public boolean getHasPaid(){
+        return hasPaid;
+    }
+
+    public LocalDate getLastPayment() {
+        return lastPayment;
+    }
+
+    public LocalDate getSubscriptionDate() {
+        return subscriptionDate;
+    }
+
+    public double paymentSelector(LocalDate memberAge){
+        int age = Period.between(memberAge, LocalDate.now()).getYears();
+
+        if(age < 18){
+            return 1000;
+        } else if (age > 18 && age < 65) {
+            return 1800;
+        } else {
+            return 1800 * 0.75;
+        }
+    }
+
+    public void setPaymentAmount(Member member){
+        this.paymentAmount = paymentSelector(member.getAge());
+    }
+
+    public void setHasPaid(){
+        if(lastPayment.plusYears(1).isBefore(LocalDate.now())){
+            hasPaid = false;
+        } else {
+            hasPaid = true;
+        }
+    }
+
+    public void setLastPayment(LocalDate lastPayment) {
+        this.lastPayment = lastPayment;
+    }
+}
