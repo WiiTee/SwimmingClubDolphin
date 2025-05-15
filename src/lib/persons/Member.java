@@ -52,4 +52,5 @@ public class Member extends Person {
     public Membership getMembership() {
         return membership;
     }
+    
 }
