@@ -4,6 +4,13 @@ import java.util.Random;
 import java.util.UUID;
 
 public class Person {
+    public enum AccessLevel{
+        MEMBER,
+        TRAINER,
+        ACCOUNTANT,
+        ADMIN
+    }
+
     private String firstName;
     private String lastName;
     private int phoneNumber;
@@ -19,6 +26,18 @@ public class Person {
 
     public String getId() {
         return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String constructID(String firstName, String lastName){

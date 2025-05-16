@@ -1,10 +1,14 @@
 package lib.membership;
 
 public class Membership {
-    private String membershipType;
+    public enum MembershipType{
+        MOTIONIST,
+        KONKURRENCE
+    }
+    private MembershipType membershipType;
     private boolean isActive;
 
-    public Membership(String membershipType){
+    public Membership(MembershipType membershipType){
         this.membershipType = membershipType;
         this.isActive = true;
     }

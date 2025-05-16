@@ -17,7 +17,11 @@ public class PaymentHandler {
     }
 
     public static void checkDebt(Member member){
-        member.getPayment().getHasPaid();
+        if(member.getPayment().getHasPaid()){
+            System.out.println("Medlem har betalt!");
+        } else {
+            System.out.println("Medlem er i restance!");
+        }
     }
 
     public static void updatePaymentAmount(Member member){
@@ -28,6 +32,8 @@ public class PaymentHandler {
     // Handles membership part
     // #######################
     public static void membershipStatus(Member member){
-        member.getMembership().isActive();
+        if(member.getIsActive()){
+            System.out.println("Medlem er aktivt");
+        }
     }
 }
