@@ -1,27 +1,36 @@
 package cli;
 
-import utils.input.ScannerInput;
+import cli.controllers.RegistrationController;
+import utils.containers.ArrayContainer;
+import utils.interfaces.IScannerInput;
 
-public class Menu{
-    static ScannerInput si = new ScannerInput();
-    static int intInput = si.intInput();
-    private static boolean isActive = true;
+import java.util.Scanner;
 
-    public static void mainMenu(){
+public class Menu implements IScannerInput{
+    private boolean isActive = true;
+    private String stringInput;
+    private int intInput;
+    private ArrayContainer arrayContainer;
+
+
+    RegistrationController rc = new RegistrationController();
+
+
+    public void mainMenu(){
         while(isActive){
             mainMenuOptions();
             mainMenuSelection();
         }
     }
 
-    public static void greetingText(){
+    public void greetingText(){
         System.out.println("""
                 ############################
                 #  Svømmeklubben Delfinen  #
                 ############################""");
     }
 
-    public static void mainMenuOptions(){
+    public void mainMenuOptions(){
         System.out.println("""
                 ############################
                 #        Hovedmenu         #
@@ -31,13 +40,15 @@ public class Menu{
                 2. Betalingsoversigt
                 3. Medlemsoversigt
                 4. Konkurrencesvømning
+                5. Luk
                 """);
     }
 
-    public static void mainMenuSelection(){
+    public void mainMenuSelection(){
+        intInput = intInput();
         switch (intInput){
             case 1 -> {
-               registerMenu();
+               rc.registerMenu(arrayContainer);
             }
             case 2 -> {
                 //Betalingsoversigt Metode
@@ -48,45 +59,13 @@ public class Menu{
             case 4 -> {
                 //Konkurrencesvømning
             }
-        }
-    }
-
-    public static void registerMenu(){
-        registerOptions();
-        registerSelection();
-    }
-
-    public static void registerOptions(){
-        System.out.println("""
-                ############################
-                #    Registreringsmenu     #
-                ############################
-                
-                1. Registrer medlem
-                2. Registrer træner
-                3. Registrer bogholder
-                4. Registrer hold
-                """);
-    }
-
-    public static void registerSelection(){
-        switch (intInput){
-            case 1 -> {
-                //Registrer medlem
-            }
-            case 2 -> {
-                //Registrer træner
-            }
-            case 3 -> {
-                //Registrer bogholder
-            }
-            case 4 -> {
-                //Registrer hold
+            case 5 -> {
+                //Slut
             }
         }
     }
 
-    public static void paymentMenu(){
+    public void paymentMenu(){
         paymentOptions();
         paymentSelection();
     }
@@ -99,10 +78,12 @@ public class Menu{
                 
                 1. Betalingsoversigt
                 2. Restance oversigt
+                3. Tilbage
                 """);
     }
 
-    public static void paymentSelection(){
+    public void paymentSelection(){
+        intInput = intInput();
         switch (intInput){
             case 1 -> {
                 //Betalingsoversigt
@@ -110,15 +91,18 @@ public class Menu{
             case 2 -> {
                 //Restance oversigt
             }
+            case 3 -> {
+                //Tilbage
+            }
         }
     }
 
-    public static void competitiveMenu(){
+    public void competitiveMenu(){
         competitiveOptions();
         competitiveSelection();
     }
 
-    public static void competitiveOptions(){
+    public void competitiveOptions(){
         System.out.println("""
                 ############################
                 #    Konkurrencesvømning   #
@@ -128,10 +112,11 @@ public class Menu{
                 2. Registrer træning
                 3. Registrer konkurrence
                 4. Registrer holdtræner
+                5. Tilbage
                 """);
     }
 
-    public static void competitiveSelection(){
+    public void competitiveSelection(){
         switch (intInput){
             case 1 -> {
                 //Registrer svømmer
@@ -145,6 +130,32 @@ public class Menu{
             case 4 -> {
                 //Registrer træner
             }
+            case 5 -> {
+                //Tilbage
+            }
+        }
+    }
+
+    public String stringInput(){
+        Scanner sc = new Scanner(System.in);
+        try {
+            stringInput = sc.nextLine();
+            return stringInput;
+
+        } catch (Exception e) {
+            return "Error: No input was found! " + e;
+        }
+    }
+
+    public int intInput(){
+        Scanner sc = new Scanner(System.in);
+        try {
+            intInput = sc.nextInt();
+            return intInput;
+
+        } catch (Exception e) {
+            System.out.println("Error: Not an int input! " + e);
+            return -1;
         }
     }
 

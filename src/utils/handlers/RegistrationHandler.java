@@ -1,0 +1,85 @@
+package utils.handlers;
+
+import lib.persons.Accountant;
+import utils.interfaces.IScannerInput;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class RegistrationHandler implements IScannerInput{
+    public boolean isRunning = true;
+    private String stringInput;
+    private int intInput;
+
+    public void registerAccountant(ArrayList<Accountant> arrayList){
+        String answer;
+        boolean checkAnswers = true;
+
+        System.out.println("""
+                #######################
+                # Registrer Bogholder #
+                #######################
+                """);
+
+        while(isRunning) {
+            System.out.println("Indtast fornavn: ");
+            stringInput = stringInput();
+            String firstName = stringInput;
+
+            System.out.println("Indtast efternavn");
+            stringInput = stringInput();
+            String lastName = stringInput;
+
+            System.out.println("Indtast telefon nummer");
+            intInput = intInput();
+            int phoneNo = intInput;
+
+            while(checkAnswers){
+                System.out.println("Er disse oplysninger korrekte? Y/N" + "\n" +
+                        "Fornavn: " + firstName + "\n" +
+                        "Efternavn: " + lastName + "\n" +
+                        "Telefon: " + phoneNo);
+
+                answer = stringInput();
+                if(answer.equalsIgnoreCase("Y")){
+                    Accountant accountant = new Accountant(firstName, lastName, phoneNo);
+                    arrayList.add(accountant);
+                    System.out.println("Bogholder tilføjet!");
+                    isRunning = false;
+                    checkAnswers = false;
+                } else if (answer.equalsIgnoreCase("N")) {
+                    System.out.println("Prøv igen!");
+                    checkAnswers = false;
+                } else {
+                    System.out.println("Error: Skriv Y eller N");
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public String stringInput(){
+        Scanner sc = new Scanner(System.in);
+        try {
+            stringInput = sc.nextLine();
+            return stringInput;
+
+        } catch (Exception e) {
+            return "Error: No input was found! " + e;
+        }
+    }
+
+    @Override
+    public int intInput(){
+        Scanner sc = new Scanner(System.in);
+        try {
+            intInput = sc.nextInt();
+            return intInput;
+
+        } catch (Exception e) {
+            System.out.println("Error: Not an int input! " + e);
+            return -1;
+        }
+    }
+}
