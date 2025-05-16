@@ -62,19 +62,19 @@ public class Payment {
 
     public void setLastPayment(LocalDate lastPayment) {
         this.lastPayment = lastPayment;
+
     }
 /*
-    //Indlæs payment data fra csv fil der indeholder alle members.
+    //Metode der indlæser all payment attributter fra én csv fil der indeholder alle Medlemmer objekter, uden at at objekter først loades i en load() metode.
 
-    //NEED:
-    //Sort payments into two arrays, with sort on age.
-
-    //Array der holder all payments.
-    private List<Integer> allPayments = new ArrayList<>();
 
     //Metode der indlæser all payment attributter fra én csv fil der indeholder alle Medlemmer objekter.
     //@Override
     public void load(String filePath) {
+
+    public ArrayList<String> loadPaymentsToPrint(String filePath) {
+        List<Integer> allPayments = new ArrayList<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
 
@@ -98,20 +98,31 @@ public class Payment {
         catch (IOException e) {
             e.printStackTrace();
         }
+        return allPayments;
+
+        //_______________________________________________________________________________________________________________
     }
     public List<Integer> getAllPayments() {
         return allPayments;
     }
 
-    //metode til at printe betalinger enkeltvis: (Metoden indeholder load() metode der loader filen.).
+    //___________________________________________________________________________________________________________________
+
+    //metode til at printe enkelte betalinger. (Metoden indeholder loadPaymentsToPrint() metode der loader filen.).
     public void printRespectivePayments() {
         System.out.print("Her er alle de enkelte betalinger: ");
         for (int temp : getAllPayments()) {
             System.out.println(temp);
         }
     }
+    //Metode til at printe enkelte betalinger uden objekt. (Metoden indeholder loadPaymentsToPrint() metode der loader filen.).
+    public void printRespectivePayments() {
+        System.out.print("Her er alle de enkelte betalinger: ");
+        for (int temp : loadPaymentsToPrint()) {
+            System.out.println(temp);
 
-    //Metode til at returnere summen af alle betalinger: (Metoden indeholder load() metode der loader filen.).
+
+    //Metode til at returnere summen af alle betalinger. (Metoden indeholder loadPaymentsToPrint() metode der loader filen.).
     public void printSumOfPayments() {
         int sum = 0;
         System.out.println("Her er summen af de enkelte betalinger: ");

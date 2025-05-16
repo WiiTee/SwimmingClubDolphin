@@ -23,6 +23,10 @@ public class Person {
         this.phoneNumber = phoneNumber;
         this.id = constructID(firstName, lastName);
     }
+    
+    public String getfirstName { return firstName}
+    
+    public String getlastName { return lastName}
 
     public String getId() {
         return id;
