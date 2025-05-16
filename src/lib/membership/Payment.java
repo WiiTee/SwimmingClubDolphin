@@ -75,6 +75,39 @@ public class Payment implements IFileHandler {
     //Metoden antager at load() returnerer en arraylist med Member Objekter der kan benyttes direkte i metoden her.
     //Variablen 'MemberObjects' henviser til denne ArrayList fra load().
 
+    public void printSumOfpaymentAmountAttributesFromLoadedObjects() {
+
+        try {
+            for (ArrayList<Member> temp : **MemberObjects**) {
+                double singlePaymentAmountString = temp.getPayment().getPaymentAmount();
+                double sumOfAllPayments +=singlePaymentAmount;
+            }
+        catch(Exception e){
+                System.out.println("Mistake happened at: " + e);
+            }
+            System.out.println("Summen af indbetalinger ligger på nuværende tidspunkt på: " + sumOfAllPayments);
+        }
+    }
+
+    //Metode der printer alle enkelte paymentAmount attributer fra Member (<-- Payment) objekter.
+    public printRespectivePaymentAmountAttributesFromLoadedObjects() {
+        try {
+            System.out.println("Oversigt over de enkelte betalinger: n/________________________________________________________");
+            for (Member temp : **MemberObjects**) {
+                double respectivePaymentAmount = temp.getPayment().getPaymentAmount();
+                String firstNameTemp = temp.getfirstName();
+                String lastNameTemp =  temp.getlastName();
+                System.out.println("Amount: " + respectivePaymentAmount ", from: " + lastNameTemp + ", " + firstNameTemp);
+            }
+        }
+        catch (exception e) {
+            return "Error occured at " + e;
+        }
+    }
+//Metode der finder summen af paymentAmount attributer fra Medlemobjekter.
+    //Metoden antager at load() returnerer en arraylist med Member Objekter der kan benyttes direkte i metoden her.
+    //Variablen 'MemberObjects' henviser til denne ArrayList fra load().
+
     //Это всё пусто! :(
 
     public void printSumOfpaymentAmountAttributesFromLoadedObjects() {
@@ -105,11 +138,10 @@ public class Payment implements IFileHandler {
         catch (exception e) {
             return "Error occured at " + e;
         }
-    }
 
     }
 
-
+    /*
     //Metode der indlæser all payment attributter fra én csv fil der indeholder alle Medlemmer objekter, uden at at objekter først loades i en load() metode.
 
     public ArrayList<String> loadPaymentsToPrint(String filePath) {
@@ -171,7 +203,7 @@ public class Payment implements IFileHandler {
 
             }
         }
-
+/*
 
 }
 
