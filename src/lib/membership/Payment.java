@@ -2,26 +2,22 @@ package lib.membership;
 
 import lib.persons.Member;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
-public class Payment implements IFileHandler {
+public class Payment {
     private LocalDate subscriptionDate;
     private LocalDate lastPayment;
     private double paymentAmount;
     private boolean hasPaid;
+    private String memberID;
 
-    public Payment(LocalDate subscriptionDate, LocalDate age){
+    public Payment(LocalDate subscriptionDate, LocalDate age, String memberID){
         this.subscriptionDate = subscriptionDate;
         this.lastPayment = subscriptionDate;
         this.paymentAmount = paymentSelector(age);
         this.hasPaid = true;
+        this.memberID = memberID;
     }
 
     public double getPaymentAmount() {
@@ -66,58 +62,23 @@ public class Payment implements IFileHandler {
 
     public void setLastPayment(LocalDate lastPayment) {
         this.lastPayment = lastPayment;
-    }
-
-    //________________________________________________________________________________________________________________
-
-
-    //Metode der finder summen af paymentAmount attributer fra Medlemobjekter.
-    //Metoden antager at load() returnerer en arraylist med Member Objekter der kan benyttes direkte i metoden her.
-    //Variablen 'MemberObjects' henviser til denne ArrayList fra load().
-
-    //Это всё пусто! :(
-
-    public void printSumOfpaymentAmountAttributesFromLoadedObjects() {
-
-        try {
-            for (ArrayList<Member> temp : **MemberObjects**) {
-                double singlePaymentAmountString = temp.getPayment().getPaymentAmount();
-                double sumOfAllPayments +=singlePaymentAmount;
-            }
-        catch(Exception e){
-                System.out.println("Mistake happened at: " + e);
-            }
-            System.out.println("Summen af indbetalinger ligger på nuværende tidspunkt på: " + sumOfAllPayments);
-        }
-    }
-
-    //Metode der printer alle enkelte paymentAmount attributer fra Member (<-- Payment) objekter.
-    public printRespectivePaymentAmountAttributesFromLoadedObjects() {
-        try {
-            System.out.println("Oversigt over de enkelte betalinger: n/________________________________________________________");
-            for (Member temp : **MemberObjects**) {
-                double respectivePaymentAmount = temp.getPayment().getPaymentAmount();
-                String firstNameTemp = temp.getfirstName();
-                String lastNameTemp =  temp.getlastName();
-                System.out.println("Amount: " + respectivePaymentAmount ", from: " + lastNameTemp + ", " + firstNameTemp);
-            }
-        }
-        catch (exception e) {
-            return "Error occured at " + e;
-        }
-    }
 
     }
-
-
+/*
     //Metode der indlæser all payment attributter fra én csv fil der indeholder alle Medlemmer objekter, uden at at objekter først loades i en load() metode.
+
+
+    //Metode der indlæser all payment attributter fra én csv fil der indeholder alle Medlemmer objekter.
+    //@Override
+    public void load(String filePath) {
 
     public ArrayList<String> loadPaymentsToPrint(String filePath) {
         List<Integer> allPayments = new ArrayList<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
 
-            while ((!line = br.nextLine) = null) {
+            while ((!line = br.nextLine()) = null) {
                 String[] fields = line.split(",");
 
                 if (fields.length >= 4);
@@ -169,9 +130,8 @@ public class Payment implements IFileHandler {
             sum += temp;
         }
 
-            }
-        }
+    }
 
-
+ */
 }
 
