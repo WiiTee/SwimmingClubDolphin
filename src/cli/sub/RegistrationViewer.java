@@ -1,27 +1,33 @@
-package cli.controllers;
+package cli.sub;
 
-import lib.competitive.Team;
 import utils.containers.ArrayContainer;
-import utils.handlers.RegistrationHandler;
+import utils.controller.PersonsController;
 import utils.interfaces.IScannerInput;
+import utils.interfaces.IViewer;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class RegistrationController implements IScannerInput {
+public class RegistrationViewer implements IScannerInput, IViewer {
     private String stringInput;
     private int intInput;
+    private boolean isActive = true;
     private ArrayContainer arrayContainer;
 
-    RegistrationHandler rh = new RegistrationHandler();
+    PersonsController rc = new PersonsController();
 
-    public void registerMenu(ArrayContainer arrayContainer){
+    //MainViewer for registrering af medlemmer, trænere m.m
+    //Indeholder options (som er UI) og selection som er controller
+    //Tager ArrayContainer med som argument så det kan gemmes til senere save/load.
+    public void menu(ArrayContainer arrayContainer){
         this.arrayContainer = arrayContainer;
-        registerOptions();
-        registerSelection();
+        while(isActive) {
+            options();
+            selection();
+        }
     }
 
-    public void registerOptions(){
+    //UI delen af registrer menuen
+    public void options(){
         System.out.println("""
                 ############################
                 #    Registreringsmenu     #
@@ -35,7 +41,8 @@ public class RegistrationController implements IScannerInput {
                 """);
     }
 
-    public void registerSelection(){
+    //Controller delen af registrer menuen
+    public void selection(){
         intInput = intInput();
 
         switch (intInput){
@@ -46,13 +53,13 @@ public class RegistrationController implements IScannerInput {
                 //Registrer træner
             }
             case 3 -> {
-                rh.registerAccountant(arrayContainer.getAccountantList());
+                rc.registerAccountant(arrayContainer.getAccountantList());
             }
             case 4 -> {
                 //Registrer hold
             }
             case 5 -> {
-                //Tilbage
+                isActive = false;
             }
         }
     }

@@ -16,17 +16,12 @@ public class Person {
     private int phoneNumber;
     private String id;
 
-    public Person(){}
     public Person(String firstName, String lastName, int phoneNumber){
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.id = constructID(firstName, lastName);
     }
-    
-    public String getfirstName { return firstName}
-    
-    public String getlastName { return lastName}
 
     public String getId() {
         return id;

@@ -13,11 +13,6 @@ public class Team {
 
     public Team(String teamName){
         this.teamName = teamName;
-        this.teamID = constructTeamID();
-    }
-
-    public String constructTeamID(){
-        return "a";
     }
 
     public String getTeamName() {
@@ -32,11 +27,15 @@ public class Team {
         return trainer;
     }
 
+    public ArrayList<Member> getSwimmers() {
+        return swimmers;
+    }
+
     public void setTrainer(Trainer trainer) {
         this.trainer = trainer;
     }
 
-    public void addSwimmers(Member member) {
+    public void setSwimmers(Member member) {
         swimmers.add(member);
     }
 }

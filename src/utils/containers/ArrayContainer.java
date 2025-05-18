@@ -11,6 +11,8 @@ import lib.persons.Trainer;
 import java.util.ArrayList;
 
 public class ArrayContainer {
+    //Container klasse så vi kan gemme og load information.
+    //Container klassen skal sendes med som argument i alle menuer og gemmes som en variabel
     private ArrayList<Member> memberList = new ArrayList<>();
     private ArrayList<Accountant> accountantList = new ArrayList<>();
     private ArrayList<Trainer> trainerList = new ArrayList<>();
@@ -27,5 +29,25 @@ public class ArrayContainer {
 
     public ArrayList<Accountant> getAccountantList() {
         return accountantList;
+    }
+
+    public ArrayList<Member> getMemberList() {
+        return memberList;
+    }
+
+    public ArrayList<Trainer> getTrainerList() {
+        return trainerList;
+    }
+
+    public ArrayList<Competition> getCompetitionList() {
+        return competitionList;
+    }
+
+    public ArrayList<Payment> getPaymentsList() {
+        return paymentsList;
+    }
+
+    public ArrayList<Training> getTrainingList() {
+        return trainingList;
     }
 }
