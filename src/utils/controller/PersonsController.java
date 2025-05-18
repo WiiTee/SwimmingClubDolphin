@@ -1,4 +1,4 @@
-package utils.handlers;
+package utils.controller;
 
 import lib.persons.Accountant;
 import utils.interfaces.IScannerInput;
@@ -6,14 +6,17 @@ import utils.interfaces.IScannerInput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class RegistrationHandler implements IScannerInput{
-    public boolean isRunning = true;
+public class PersonsController implements IScannerInput{
+
+    //Indeholder alle metoder der ikke direkte manipulere data i Trainer, Member og Accountant objekter!
     private String stringInput;
     private int intInput;
 
+    //Registrerer en bogholder
     public void registerAccountant(ArrayList<Accountant> arrayList){
         String answer;
         boolean checkAnswers = true;
+        boolean isRunning = true;
 
         System.out.println("""
                 #######################
@@ -34,6 +37,7 @@ public class RegistrationHandler implements IScannerInput{
             intInput = intInput();
             int phoneNo = intInput;
 
+            //Validering inden den opretter objektet
             while(checkAnswers){
                 System.out.println("Er disse oplysninger korrekte? Y/N" + "\n" +
                         "Fornavn: " + firstName + "\n" +

@@ -1,7 +1,5 @@
 package lib.persons;
 
-import java.util.UUID;
-
 public class Trainer extends Person{
     private String trainerID;
 
