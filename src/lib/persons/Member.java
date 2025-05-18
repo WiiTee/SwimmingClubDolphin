@@ -1,7 +1,8 @@
 package lib.persons;
 
+import lib.competitive.Competition;
 import lib.competitive.Team;
-import lib.membership.Membership;
+import lib.competitive.Training;
 import lib.membership.Payment;
 
 import java.time.LocalDate;
@@ -18,8 +19,8 @@ public class Member extends Person {
     private Payment payment;
     private ArrayList<String> disciplines;
     private boolean isActive;
-    //private ArrayList<Training> trainingPerformance;
-    //private ArrayList<Competition> competitionPerformance;
+    private ArrayList<Training> trainingPerformance;
+    private ArrayList<Competition> competitionPerformance;
 
     public Member(String firstName, String lastName, int phoneNumber, MembershipType membership, String address, LocalDate age){
         super(firstName, lastName, phoneNumber);
@@ -58,6 +59,10 @@ public class Member extends Person {
 
     public boolean getIsActive(){
         return isActive;
+    }
+
+    public ArrayList<Training> getTrainingPerformance(){
+        return trainingPerformance;
     }
 
     public void setDisciplines(ArrayList<String> disciplines) {

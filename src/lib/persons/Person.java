@@ -16,17 +16,12 @@ public class Person {
     private int phoneNumber;
     private String id;
 
-    public Person(){}
     public Person(String firstName, String lastName, int phoneNumber){
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.id = constructID(firstName, lastName);
     }
-    
-    public String getfirstName { return firstName}
-    
-    public String getlastName { return lastName}
 
     public String getId() {
         return id;
@@ -52,13 +47,10 @@ public class Person {
         int conInt = ran.nextInt(1000, 9999);
         String convertInt = String.valueOf(conInt);
 
-        String constructedID;
-
-        return constructedID = subFirst + subLast + convertInt;
+        return subFirst + subLast + convertInt;
     }
 
     public String constructAccessID(){
-        String constructID;
-        return constructID = UUID.randomUUID().toString();
+        return UUID.randomUUID().toString();
     }
 }
