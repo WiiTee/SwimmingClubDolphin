@@ -23,7 +23,7 @@ public class ArrayContainer {
     private ArrayList<Competition> competitionList = new ArrayList<>();
     private ArrayList<Training> trainingList = new ArrayList<>();
 
-    public ArrayList<Team> getTeamList() {
+    public ArrayList<Team> getTeamList(){
         return teamList;
     }
 

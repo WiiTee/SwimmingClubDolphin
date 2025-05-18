@@ -47,13 +47,10 @@ public class Person {
         int conInt = ran.nextInt(1000, 9999);
         String convertInt = String.valueOf(conInt);
 
-        String constructedID;
-
-        return constructedID = subFirst + subLast + convertInt;
+        return subFirst + subLast + convertInt;
     }
 
     public String constructAccessID(){
-        String constructID;
-        return constructID = UUID.randomUUID().toString();
+        return UUID.randomUUID().toString();
     }
 }

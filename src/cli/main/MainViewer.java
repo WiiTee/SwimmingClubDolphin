@@ -30,6 +30,7 @@ public class MainViewer implements IScannerInput, IViewer {
         }
     }
 
+    //Velkomst tekst
     public void greetingText(){
         System.out.println("""
                 ############################
@@ -89,11 +90,4 @@ public class MainViewer implements IScannerInput, IViewer {
             return -1;
         }
     }
-
-    //Ikke nødvendigt
-    /*
-    public static void memberMenu(){}
-    public static void memberOptions(){}
-    public static void memberSelection(){}
-    */
 }

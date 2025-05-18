@@ -62,7 +62,7 @@ public class MembershipController implements IScannerInput {
     // Handles membership part
     // #######################
 
-    //Tjekker om et medlem er aktivt.. (?) Ved ikke hvorfor :).
+    //Tjekker om et medlem er aktivt (?) Ved ikke hvorfor :).
     public void membershipStatus(Member member){
         if(member.getIsActive()){
             System.out.println("Medlem er aktivt");

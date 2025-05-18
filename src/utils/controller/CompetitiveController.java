@@ -15,7 +15,6 @@ import java.util.Scanner;
 public class CompetitiveController implements IScannerInput{
     //Indeholder alle metoder der ikke direkte manipulere data i Competition og Training objekter.
     private String stringInput;
-    private ArrayContainer arrayContainer;
 
     //Registrer en ny svømmer
     public void addSwimmer(ArrayList<Member> memberList, ArrayList<Team> teamList) {
