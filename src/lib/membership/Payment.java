@@ -12,7 +12,7 @@ public class Payment {
     private boolean hasPaid;
     private String memberID;
 
-    public Payment(LocalDate subscriptionDate, LocalDate age, String memberID){
+    public Payment(LocalDate subscriptionDate, LocalDate age, String memberID) {
         this.subscriptionDate = subscriptionDate;
         this.lastPayment = subscriptionDate;
         this.paymentAmount = paymentSelector(age);
@@ -24,7 +24,7 @@ public class Payment {
         return paymentAmount;
     }
 
-    public boolean getHasPaid(){
+    public boolean getHasPaid() {
         return hasPaid;
     }
 
@@ -36,10 +36,10 @@ public class Payment {
         return subscriptionDate;
     }
 
-    public double paymentSelector(LocalDate memberAge){
+    public double paymentSelector(LocalDate memberAge) {
         int age = Period.between(memberAge, LocalDate.now()).getYears();
 
-        if(age < 18){
+        if (age < 18) {
             return 1000;
         } else if (age > 18 && age < 65) {
             return 1800;
@@ -48,11 +48,11 @@ public class Payment {
         }
     }
 
-    public void setPaymentAmount(Member member){
+    public void setPaymentAmount(Member member) {
         this.paymentAmount = paymentSelector(member.getAge());
     }
 
-    public void setHasPaid(){
+    public void setHasPaid() {
         hasPaid = !lastPayment.plusYears(1).isAfter(LocalDate.now());
     }
 
@@ -60,82 +60,34 @@ public class Payment {
         this.lastPayment = lastPayment;
     }
 
-    //________________________________________________________________________________________________________________
-
-
-    //Metode der finder summen af paymentAmount attributer fra Medlemobjekter.
-    //Metoden antager at load() returnerer en arraylist med Member Objekter der kan benyttes direkte i metoden her.
-    //Variablen 'MemberObjects' henviser til denne ArrayList fra load().
-
-    public void printSumOfpaymentAmountAttributesFromLoadedObjects() {
+    public void printSumOfpayment(ArrayList<Member> memberObjects) {
+        double sumOfPayemnts = 0.0;
 
         try {
-            for (ArrayList<Member> temp : **MemberObjects**) {
-                double singlePaymentAmountString = temp.getPayment().getPaymentAmount();
-                double sumOfAllPayments +=singlePaymentAmount;
+            for (Member temp : memberObjects) {
+                double singlePayment = temp.getPayment().getPaymentAmount();
+                sumOfAllPayments += singlePaymentAmount;
             }
+            System.out.println("Summen af indbetalinger ligger på nuværende tidspunkt på: " + sumOfAllPayments);
         catch(Exception e){
                 System.out.println("Mistake happened at: " + e);
             }
-            System.out.println("Summen af indbetalinger ligger på nuværende tidspunkt på: " + sumOfAllPayments);
         }
     }
 
-    //Metode der printer alle enkelte paymentAmount attributer fra Member (<-- Payment) objekter.
-    public printRespectivePaymentAmountAttributesFromLoadedObjects() {
+    public void printRespectivePayment(ArrayList<Member> memberObjects) {
         try {
             System.out.println("Oversigt over de enkelte betalinger: n/________________________________________________________");
-            for (Member temp : **MemberObjects**) {
+
+            for (Member temp : memberobjects) {
                 double respectivePaymentAmount = temp.getPayment().getPaymentAmount();
                 String firstNameTemp = temp.getfirstName();
-                String lastNameTemp =  temp.getlastName();
-                System.out.println("Amount: " + respectivePaymentAmount ", from: " + lastNameTemp + ", " + firstNameTemp);
+                String lastNameTemp = temp.getlastName();
+
+                System.out.println("Amount: " + respectivePaymentAmount + ", from: " + lastNameTemp + ", " + firstNameTemp);
             }
-        }
-        catch (exception e) {
+        } catch (Exception e) {
             return "Error occured at " + e;
         }
     }
-//Metode der finder summen af paymentAmount attributer fra Medlemobjekter.
-    //Metoden antager at load() returnerer en arraylist med Member Objekter der kan benyttes direkte i metoden her.
-    //Variablen 'MemberObjects' henviser til denne ArrayList fra load().
-
-    public void printSumOfpaymentAmountAttributesFromLoadedObjects() {
-
-            while ((!line = br.nextLine()) = null) {
-                String[] fields = line.split(",");
-        try {
-            for (ArrayList<Member> temp : **MemberObjects**) {
-                double singlePaymentAmountString = temp.getPayment().getPaymentAmount();
-                double sumOfAllPayments +=singlePaymentAmount;
-            }
-        catch(Exception e){
-                System.out.println("Mistake happened at: " + e);
-            }
-            System.out.println("Summen af indbetalinger ligger på nuværende tidspunkt på: " + sumOfAllPayments);
-        }
-    }
-
-    //Metode der printer alle enkelte paymentAmount attributer fra Member (<-- Payment) objekter.
-    public printRespectivePaymentAmountAttributesFromLoadedObjects() {
-        try {
-            System.out.println("Oversigt over de enkelte betalinger: n/________________________________________________________");
-            for (Member temp : **MemberObjects**) {
-                double respectivePaymentAmount = temp.getPayment().getPaymentAmount();
-                String firstNameTemp = temp.getfirstName();
-                String lastNameTemp =  temp.getlastName();
-                System.out.println("Amount: " + respectivePaymentAmount ", from: " + lastNameTemp + ", " + firstNameTemp);
-            }
-        }
-        catch (exception e) {
-            return "Error occured at " + e;
-        }
-        return allPayments;
-
-        //_______________________________________________________________________________________________________________
-    }
-    public List<Integer> getAllPayments() {
-        return allPayments;
-    }
-
-    }
+}
