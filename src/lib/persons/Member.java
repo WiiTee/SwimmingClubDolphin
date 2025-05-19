@@ -1,5 +1,6 @@
 package lib.persons;
 
+import lib.compswim.Competition;
 import lib.compswim.Team;
 import lib.membership.Membership;
 import lib.membership.Payment;
@@ -15,7 +16,7 @@ public class Member extends Person {
     private Payment payment;
     private ArrayList<String> disciplines;
     //private ArrayList<Training> trainingPerformance;
-    //private ArrayList<Competition> competitionPerformance;
+    private ArrayList<Competition> competitionPerformance;
 
     public Member(String firstName, String lastName, int phoneNumber, String newMembership, String address, LocalDate age){
         super(firstName, lastName, phoneNumber);
@@ -51,5 +52,17 @@ public class Member extends Person {
 
     public Membership getMembership() {
         return membership;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public ArrayList<Competition> getCompetitionPerformance() {
+        return competitionPerformance;
     }
 }
