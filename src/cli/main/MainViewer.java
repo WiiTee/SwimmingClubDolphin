@@ -1,6 +1,7 @@
 package cli.main;
 
 import cli.sub.CompetitiveViewer;
+import utils.FileHandler;
 import utils.containers.ArrayContainer;
 import utils.interfaces.IScannerInput;
 import utils.interfaces.IViewer;
@@ -60,8 +61,14 @@ public class MainViewer implements IScannerInput, IViewer {
             //Betalingsmenu
             case 2 -> pc.menu(arrayContainer);
             //Medlemsoversigt
-//            TODO: implement "load" fn
-            case 3 -> {}
+            // TODO: implement "load" fn -> Test
+            case 3 -> {
+                var membersDatabaseName = "members.csv";
+                var fh = new FileHandler();
+                var databaseOutputValue = fh.load(membersDatabaseName);
+
+                System.out.println("\nMedlemsoversigt:\n" + databaseOutputValue);
+            }
             //Konkurrencesvømning menu
             case 4 -> cv.menu(arrayContainer);
             //Luk programmet
