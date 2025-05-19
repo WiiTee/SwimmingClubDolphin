@@ -60,6 +60,7 @@ public class MainViewer implements IScannerInput, IViewer {
             //Betalingsmenu
             case 2 -> pc.menu(arrayContainer);
             //Medlemsoversigt
+//            TODO: implement "load" fn
             case 3 -> {}
             //Konkurrencesvømning menu
             case 4 -> cv.menu(arrayContainer);
