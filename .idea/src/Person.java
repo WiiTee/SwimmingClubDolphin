@@ -1,34 +1,39 @@
-import java.time.LocalDate;
-import java.time.Period;
+import java.util.Random;
+import java.util.UUID;
 
 public class Person {
-    private static int næsteID = 1;
-    private int id;
     private String firstName;
     private String lastName;
-    private LocalDate birthDate;
-    private String phoneNo;
-    private String address;
+    private int phoneNumber;
+    private String id;
 
-    public Person(String firstName, String lastName, LocalDate birthDate, String phoneNo, String address) {
-        this.id = næsteID++;
+    public Person(){}
+    public Person(String firstName, String lastName, int phoneNumber){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.phoneNo = phoneNo;
-        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.id = constructID(firstName, lastName);
     }
 
-    @Override
-    public String toString() {
-        return "ID: " + id + ", First Name: " + firstName + ", Last Name: " + lastName + ", Age: " + getAge() + ", Phone Number: " + phoneNo + ", Address: " + address;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public int getAge() {
-        return Period.between(birthDate, LocalDate.now()).getYears();
+    public String constructID(String firstName, String lastName){
+        String subFirst = firstName.substring(0, 2);
+        String subLast = lastName.substring(0, 2);
+
+        Random ran = new Random();
+        int conInt = ran.nextInt(1000, 9999);
+        String convertInt = String.valueOf(conInt);
+
+        String constructedID;
+
+        return constructedID = subFirst + subLast + convertInt;
+    }
+
+    public String constructAccessID(){
+        String constructID;
+        return constructID = UUID.randomUUID().toString();
     }
 }

@@ -1,10 +1,14 @@
+import lib.persons.Member;
+import lib.membership.Membership;
+import lib.membership.Payment;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RegistrationOfMember {
     Scanner sc = new Scanner(System.in);
-    ArrayList<Person> members = new ArrayList<>();
+    ArrayList<Member> members = new ArrayList<>();
 
     public void run() {
         boolean runProgram = true;
@@ -46,18 +50,23 @@ public class RegistrationOfMember {
         String lastName = sc.nextLine();
 
         System.out.println("Enter your birthdate (YYYY-MM-DD): ");
-        LocalDate birthDate = LocalDate.parse(sc.nextLine());
+        LocalDate age = LocalDate.parse(sc.nextLine());
 
         System.out.println("Enter your phone number: ");
-        String phoneNo = sc.nextLine();
+        int phoneNumber = Integer.parseInt(sc.nextLine());
 
         System.out.println("Enter your address: ");
         String address = sc.nextLine();
 
-        Person newMember = new Person(firstName, lastName, birthDate, phoneNo, address);
+        System.out.println("Enter membership type ('motionist' or 'konkurrence'): ");
+        String membershipType = sc.nextLine();
+
+        Member newMember = new Member(firstName, lastName, age, phoneNumber, address, membershipType);
         members.add(newMember);
 
         System.out.println("Member registered with ID: " + newMember.getId());
+        System.out.println("Payment amount: " + newMember.getPayment().getPaymentAmount());
+        System.out.println("Membership type: " + newMember.getMembership().getMembershipType());
     }
 
     public void showMembers() {
@@ -65,19 +74,26 @@ public class RegistrationOfMember {
             System.out.println("No registered members yet.");
         } else {
             System.out.println("\nRegistered members:");
-            for (Person m : members) {
-                System.out.println(m);
+            for (Member m : members) {
+                System.out.println("ID: " + m.getId());
+                System.out.println("Name: " + m.getFirstName() + " " + m.getLastName());
+                System.out.println("Phone: " + m.getPhoneNumber());
+                System.out.println("Address: " + m.getAddress());
+                System.out.println("Membership: " + m.getMembership().getMembershipType());
+                System.out.println("Payment: " + m.getPayment().getPaymentAmount() + " DKK");
+                System.out.println("Has Paid: " + m.getPayment().getHasPaid());
+                System.out.println("Subscription Date: " + m.getPayment().getSubscriptionDate());
             }
         }
     }
 
     public void removeMember() {
         System.out.println("Enter the ID of the member to remove:");
-        int removeID = Integer.parseInt(sc.nextLine());
+        String removeID = sc.nextLine();
         boolean removed = false;
 
         for (int i = 0; i < members.size(); i++) {
-            if (members.get(i).getId() == removeID) {
+            if (members.get(i).getId().equals(removeID)) {
                 members.remove(i);
                 System.out.println("Member with ID " + removeID + " has been removed.");
                 removed = true;
@@ -95,5 +111,3 @@ public class RegistrationOfMember {
         program.run();
     }
 }
-
-
