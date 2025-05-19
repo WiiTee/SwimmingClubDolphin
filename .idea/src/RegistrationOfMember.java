@@ -50,7 +50,7 @@ public class RegistrationOfMember {
         String lastName = sc.nextLine();
 
         System.out.println("Enter your birthdate (YYYY-MM-DD): ");
-        LocalDate birthDate = LocalDate.parse(sc.nextLine());
+        LocalDate age = LocalDate.parse(sc.nextLine());
 
         System.out.println("Enter your phone number: ");
         String phoneNumber = sc.nextLine().trim();
@@ -75,7 +75,7 @@ public class RegistrationOfMember {
             }
         }
 
-        Member newMember = new Member(firstName, lastName, birthDate, phoneNumber, address, membershipType);
+        Member newMember = new Member(firstName, lastName, age, phoneNumber, address, membershipType);
         members.add(newMember);
 
         System.out.println("Member registered with ID: " + newMember.getId());
