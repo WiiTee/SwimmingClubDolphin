@@ -50,24 +50,39 @@ public class RegistrationOfMember {
         String lastName = sc.nextLine();
 
         System.out.println("Enter your birthdate (YYYY-MM-DD): ");
-        LocalDate age = LocalDate.parse(sc.nextLine());
+        LocalDate birthDate = LocalDate.parse(sc.nextLine());
 
         System.out.println("Enter your phone number: ");
-        int phoneNumber = Integer.parseInt(sc.nextLine());
+        String phoneNumber = sc.nextLine().trim();
 
         System.out.println("Enter your address: ");
         String address = sc.nextLine();
 
-        System.out.println("Enter membership type ('motionist' or 'konkurrence'): ");
-        String membershipType = sc.nextLine();
+        Membership.MembershipType membershipType = null;
+        while (membershipType == null) {
+            System.out.println("Enter membership type ('motionist' or 'konkurrence'): ");
+            String input = sc.nextLine().trim().toLowerCase();
 
-        Member newMember = new Member(firstName, lastName, age, phoneNumber, address, membershipType);
+            switch (input) {
+                case "motionist":
+                    membershipType = Membership.MembershipType.MOTIONIST;
+                    break;
+                case "konkurrence":
+                    membershipType = Membership.MembershipType.KONKURRENCE;
+                    break;
+                default:
+                    System.out.println("Invalid input. Please enter 'motionist' or 'konkurrence'.");
+            }
+        }
+
+        Member newMember = new Member(firstName, lastName, birthDate, phoneNumber, address, membershipType);
         members.add(newMember);
 
         System.out.println("Member registered with ID: " + newMember.getId());
         System.out.println("Payment amount: " + newMember.getPayment().getPaymentAmount());
         System.out.println("Membership type: " + newMember.getMembership().getMembershipType());
     }
+
 
     public void showMembers() {
         if (members.isEmpty()) {
