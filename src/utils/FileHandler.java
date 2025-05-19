@@ -1,9 +1,11 @@
 package utils;
 
+import utils.interfaces.IFileHandler;
+
 import java.io.*;
 import java.util.ArrayList;
 
-public class FileHandler {
+public class FileHandler implements IFileHandler {
 
     /**
      * Sets up a file in the 'data' subdirectory of the current working directory.
