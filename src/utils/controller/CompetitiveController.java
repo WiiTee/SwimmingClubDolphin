@@ -67,7 +67,7 @@ public class CompetitiveController implements IScannerInput{
             }
         }
     }
-
+    //Add trainer
     public void addTrainer(ArrayList<Trainer> trainerList, ArrayList<Team> teamList){
         String teamIDStr;
         String trainerIDStr;

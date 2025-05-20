@@ -35,7 +35,9 @@ public class PaymentViewer implements IScannerInput, IViewer {
                 
                 1. Betalingsoversigt
                 2. Restance oversigt
-                3. Tilbage
+                3. Betal regning
+                4. Opdatér betalingssum
+                5. Tilbage
                 """);
     }
 
