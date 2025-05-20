@@ -1,5 +1,6 @@
 package utils.controller;
 
+import lib.competitive.Competition;
 import lib.competitive.Team;
 import lib.competitive.Training;
 import lib.persons.Member;
@@ -67,6 +68,32 @@ public class CompetitiveController implements IScannerInput{
             }
         }
     }
+
+    //Indeler member i seniorhold eller juniorhold.
+    public void divideCompetitionByAge(ArrayList<Member> members) {
+        Team juniorTeam = new Team("Juniorhold");
+        Team seniorTeam = new Team("Seniorhold");
+        for (Member member : members) {
+            LocalDate birthDate = member.getAge();
+            if (birthDate == null) {
+                System.out.println("Du har ikke givet alder på dette medlem: " + member.getId());
+            } else if (birthDate.plusYears(18).isAfter(LocalDate.now())) {
+                juniorTeam.setSwimmers(member);
+                System.out.println(member.getId() + " Tilføjet til juniorhold.");
+            } else {
+                seniorTeam.setSwimmers(member);
+                System.out.println(member.getId() + " Tilføjet til seniorhold.");
+            }
+        }
+    }
+
+    //Registrering af konkurrencesvømmer.
+    public void registerCompetition(Member member, String competitionTime, String competitionName, LocalDate competitionDate, String discipline) {
+        Competition competition = new Competition(competitionTime, member.getId(), competitionName, competitionDate, discipline);
+        member.getCompetitionPerformance().add(competition);
+        System.out.println("Konkurrence tilføjet: " + member.getId());
+    }
+
     //Add trainer
     public void addTrainer(ArrayList<Trainer> trainerList, ArrayList<Team> teamList){
         String teamIDStr;
