@@ -1,6 +1,7 @@
 package lib.membership;
 
 import lib.persons.Member;
+import java.util.ArrayList;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -66,12 +67,12 @@ public class Payment {
         try {
             for (Member temp : memberObjects) {
                 double singlePayment = temp.getPayment().getPaymentAmount();
-                sumOfAllPayments += singlePaymentAmount;
+                sumOfPayments += singlePaymentAmount;
             }
-            System.out.println("Summen af indbetalinger ligger på nuværende tidspunkt på: " + sumOfAllPayments);
+            System.out.println("Summen af indbetalinger ligger på nuværende tidspunkt på: " + sumOfPayments);
+        }
         catch(Exception e){
                 System.out.println("Mistake happened at: " + e);
-            }
         }
     }
 
@@ -79,15 +80,15 @@ public class Payment {
         try {
             System.out.println("Oversigt over de enkelte betalinger: n/________________________________________________________");
 
-            for (Member temp : memberobjects) {
+            for (Member temp : memberObjects) {
                 double respectivePaymentAmount = temp.getPayment().getPaymentAmount();
-                String firstNameTemp = temp.getfirstName();
-                String lastNameTemp = temp.getlastName();
+                String firstNameTemp = temp.getFirstName();
+                String lastNameTemp = temp.getLastName();
 
                 System.out.println("Amount: " + respectivePaymentAmount + ", from: " + lastNameTemp + ", " + firstNameTemp);
             }
         } catch (Exception e) {
-            return "Error occured at " + e;
+            System.out.println("Error occured at " + e);
         }
     }
 }
