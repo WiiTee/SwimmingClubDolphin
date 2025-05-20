@@ -1,3 +1,4 @@
+import lib.membership.Membership;
 import lib.persons.Member;
 import lib.membership.Payment;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentTest {
-    Member member = new Member("test", "test", 1234, Member.MembershipType.MOTIONIST, "test", LocalDate.of(1987, 11, 14));
+    Member member = new Member("test", "test", 1234, new Membership(Membership.MembershipType.MOTIONIST, "test"), "test", LocalDate.of(1987, 11, 14));
 
     @Test
     void getPaymentAmount() {

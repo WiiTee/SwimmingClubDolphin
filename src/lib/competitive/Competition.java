@@ -3,32 +3,38 @@ package lib.competitive;
 import java.time.LocalDate;
 
 public class Competition {
-    private String lapTime;
-    private LocalDate lapDate;
+    private String memberID;
+    private int competitionTime;
     private String competitionName;
     private LocalDate competitionDate;
+    private String discipline;
 
     //Opretter Competition objekter
-    public Competition(String lapTime, LocalDate lapDate, String competitionName, LocalDate competitionDate){
-        this.lapTime = lapTime;
-        this.lapDate = lapDate;
+    public Competition(int competitionTime, String competitionName, LocalDate competitionDate, String discipline){
+        this.competitionTime = competitionTime;
+        this.memberID = memberID;
         this.competitionName = competitionName;
         this.competitionDate = competitionDate;
+        this.discipline = discipline;
+    }
+
+    public String getMemberID() {
+        return memberID;
+    }
+
+    public String getDiscipline() {
+        return discipline;
     }
 
     public LocalDate getCompetitionDate() {
         return competitionDate;
     }
 
-    public LocalDate getLapDate() {
-        return lapDate;
-    }
-
     public String getCompetitionName() {
         return competitionName;
     }
 
-    public String getLapTime() {
-        return lapTime;
+    public int getCompetitionTime() {
+        return competitionTime;
     }
 }
