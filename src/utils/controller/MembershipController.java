@@ -5,12 +5,12 @@ import utils.interfaces.IScannerInput;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class MembershipController implements IScannerInput {
 
     //Indeholder alle metoder der ikke direkte manipulere data i Payment of Membership objekter
-
     private int intInput;
     private String stringInput;
 
@@ -64,11 +64,10 @@ public class MembershipController implements IScannerInput {
 
     //Tjekker om et medlem er aktivt (?) Ved ikke hvorfor :).
     public void membershipStatus(Member member){
-        if(member.getIsActive()){
+        if(member.getMembership().getIsActive()){
             System.out.println("Medlem er aktivt");
         }
     }
-
 
     @Override
     public String stringInput(){

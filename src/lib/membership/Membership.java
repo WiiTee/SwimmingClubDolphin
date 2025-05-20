@@ -34,4 +34,8 @@ public class Membership {
             return isActive = true;
         }
     }
+
+    public boolean getIsActive(){
+        return isActive;
+    }
 }

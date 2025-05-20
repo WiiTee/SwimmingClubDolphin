@@ -39,14 +39,14 @@ public class CompetitiveViewer implements IViewer, IScannerInput {
     }
 
     public void selection(){
+            intInput = intInput();
             switch (intInput) {
                 //Registrer svømmer
                 case 1 -> cc.addSwimmer(arrayContainer.getMemberList(), arrayContainer.getTeamList());
                 //Registrer træning
                 case 2 -> cc.registerTraining(arrayContainer.getMemberList());
                 //Registrer konkurrence
-                case 3 -> {
-                }
+                case 3 -> {}
                 //Registrer træner
                 case 4 -> cc.addTrainer(arrayContainer.getTrainerList(), arrayContainer.getTeamList());
                 //Tilbage
