@@ -53,6 +53,7 @@ public class CompetitiveController implements IScannerInput{
                 }
 
                 member.setDisciplines(disciplines);
+                divideCompetitionByAge(memberList, teamList);
 
                 System.out.println("Registrer hold");
                 for (Team team : teamList) {
@@ -70,9 +71,23 @@ public class CompetitiveController implements IScannerInput{
     }
 
     //Indeler member i seniorhold eller juniorhold.
-    public void divideCompetitionByAge(ArrayList<Member> members) {
-        Team juniorTeam = new Team("Juniorhold");
-        Team seniorTeam = new Team("Seniorhold");
+    public void divideCompetitionByAge(ArrayList<Member> members, ArrayList<Team> teamList) {
+        Team juniorTeam = null;
+        Team seniorTeam = null;
+
+        for (Team team : teamList) {
+            if (team.getTeamName().equalsIgnoreCase("Juniorhold")) {
+                juniorTeam = team;
+            } else if (team.getTeamName().equalsIgnoreCase("Seniorhold")) {
+                seniorTeam = team;
+            }
+        }
+
+        if (juniorTeam == null || seniorTeam == null) {
+            System.out.println("Fejl: Junior- eller Seniorhold ikke fundet i teamList.");
+            return;
+        }
+
         for (Member member : members) {
             LocalDate birthDate = member.getAge();
             if (birthDate == null) {
@@ -87,11 +102,49 @@ public class CompetitiveController implements IScannerInput{
         }
     }
 
+
     //Registrering af konkurrencesvømmer.
-    public void registerCompetition(Member member, String competitionTime, String competitionName, LocalDate competitionDate, String discipline) {
-        Competition competition = new Competition(competitionTime, member.getId(), competitionName, competitionDate, discipline);
-        member.getCompetitionPerformance().add(competition);
-        System.out.println("Konkurrence tilføjet: " + member.getId());
+    public void registrerCompetition(ArrayList<Member> memberList, ArrayList<Competition> competitionList) {
+        System.out.println("Hvilket medlem deltager i konkurrencen?");
+        for (Member member : memberList) {
+            System.out.println("Navn: " + member.getFirstName() + " " + member.getLastName() +
+                    ". Medlemmets ID: " + member.getId());
+        }
+
+        System.out.println("Indtast MedlemID:");
+        stringInput = stringInput();
+        String inputCompetition = stringInput;
+
+        for (Member member : memberList) {
+            if (inputCompetition.equalsIgnoreCase(member.getId())) {
+                System.out.println("Indtast konkurrencens tidspunkt:");
+                String competitionTime = stringInput();
+
+                System.out.println("Indtast konkurrencens navn:");
+                String competitionName = stringInput();
+
+                System.out.println("Indtast konkurrencens dato (YYYY-MM-DD):");
+                String competitionDate = stringInput();
+                LocalDate competitionLocalDate = LocalDate.parse(competitionDate);
+
+                System.out.println("Indtast disciplin:");
+                String discipline = stringInput();
+
+                Competition competition = new Competition(
+                        competitionTime,
+                        member.getId(),
+                        competitionName,
+                        competitionLocalDate,
+                        discipline
+                );
+
+                member.getCompetitionPerformance().add(competition);
+                competitionList.add(competition);
+
+                System.out.println("Konkurrence registreret for medlem: " + member.getFirstName() + " " + member.getLastName());
+                break;
+            }
+        }
     }
 
     //Add trainer
