@@ -27,7 +27,7 @@ public class Member extends Person {
     }
 
 
-    public Member(String firstName, String lastName, int phoneNumber, Membership membership, Team team, String address, LocalDate age, Payment payment, ArrayList<String> disciplines) {
+    public Member(String firstName, String lastName, int phoneNumber, Membership membership, Team team, String address, LocalDate age, Payment payment, ArrayList<String> disciplines, ArrayList<Competition> competitionPerformance) {
         super(firstName, lastName, phoneNumber);
         super.constructID(firstName, lastName);
         this.membership = membership;
@@ -35,6 +35,7 @@ public class Member extends Person {
         this.age = age;
         this.payment = payment;
         this.disciplines = disciplines;
+        this.competitionPerformance = competitionPerformance;
     }
 
     public LocalDate getAge() {
@@ -57,7 +58,7 @@ public class Member extends Person {
         return trainingPerformance;
     }
 
-    public ArrayList<Competition> getCompetitionPerformance() { return competitionPerformance}
+    public ArrayList<Competition> getCompetitionPerformance() { return competitionPerformance; }
 
     public void setDisciplines(ArrayList<String> disciplines) {
         this.disciplines = disciplines;

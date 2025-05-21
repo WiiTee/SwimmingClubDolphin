@@ -1,5 +1,6 @@
 package utils.controller;
 
+import lib.competitive.Competition;
 import lib.competitive.Team;
 import lib.competitive.Training;
 import lib.persons.Member;
@@ -11,9 +12,10 @@ import utils.containers.ArrayContainer;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
-public class CompetitiveController implements IScannerInput{
+public class CompetitiveController implements IScannerInput {
     //Indeholder alle metoder der ikke direkte manipulere data i Competition og Training objekter.
     private String stringInput;
 
@@ -69,37 +71,130 @@ public class CompetitiveController implements IScannerInput{
         }
     }
 
+
+    //Special getter method (returns the first object of the competitionPerformance (ArrayList) attribute within the Member object).
+    public Competition getFirstCompetition() {
+        return competitionPerformance.get(0);
+    }
+
+
     //Find the top five contestants
-    public String printTopFive() {
+    public void printTopFive() {
 
         //ArrayList that holds all members that have a Competition object with values.
-        ArrayList<Competition> tempCompetitors = new ArrayList<>();
+        ArrayList<Member> tempCompetitors = new ArrayList<>();
 
         //ArrayList for abovementioned objects, for parting into an ArrayList of each respective discpline.
         ArrayList<Member> crawlMember = new ArrayList<>();
         ArrayList<Member> butterflyMember = new ArrayList<>();
         ArrayList<Member> rygcrawlMember = new ArrayList<>();
-        ArrayList<Member> brystsvømning = new ArrayList<>();
+        ArrayList<Member> brystsvømningMember = new ArrayList<>();
 
         //memberList ligger i ArrayContainer class - hvorfor fanden genkender den ikke den i denne klasse?:'(
         for (Member temp : memberList) {
             //Is the respective member's competitionPerformance attribute empty for competition objects?
-            if (!tempCompetitors.getCompetitionPerformance().isEmpty()) {
+            if (!temp.getCompetitionPerformance().isEmpty()) {
                 tempCompetitors.add(temp);
-
-                for (Member temp2 : tempCompetitors) {
-                    switch (tem2.)
-                }
+                //skal man have et for loop her, som tager competitionPerformance array for temp og gennemgår hvert Competition object, eller kan nedenstående kode godt iterere igennem det array der sættes til at skulle sortes? JA, denne linje af kode itererer.
+                //Sort competitionPerformance array for every member object by competitionTime attribute:
+                temp.getCompetitionPerformance().sort(Comparator.comparingInt(o -> Integer.parseInt(o.getCompetitionTime())));
+            }
+        }
+        //part the sorted Memberobjects into for distinct arraylist for each discipline:
+        for (Member temp : tempCompetitors) {
+            switch (temp.getFirstCompetition().getDiscipline()) {
+                case "Crawl":
+                    crawlMember.add(temp);
+                    break;
+                case "Butterfly":
+                    butterflyMember.add(temp);
+                    break;
+                case "Rygcrawl":
+                    rygcrawlMember.add(temp);
+                    break;
+                case "Brystsvømning":
+                    brystsvømningMember.add(temp);
+                    break;
+                default:
+                    System.out.println("Unknown value:");
 
             }
         }
 
+        //Sort the crawlMember ArrayList.
+        crawlMember.sort(Comparator.comparingInt(o -> Integer.parseInt(o.getFirstCompetition().competitionTime())));
+
+        //Sort the other disciplinary lists:
+        butterflyMember.sort(Comparator.comparingInt(o -> Integer.parseInt(o.getFirstCompetition().competitionTime())));
+
+        rygcrawlMember.sort(Comparator.comparingInt(o -> Integer.parseInt(o.getFirstCompetition().competitionTime())));
+
+        brystsvømningMember.sort(Comparator.comparingInt(o -> Integer.parseInt(o.getFirstCompetition().competitionTime())));
+
+        //Print
+        try {
+            for (int i = 0; i < 5; i++) {
+                System.out.println("These are the top five contestants within the discipline CRAWL: MemberID = " + crawlMember.get(i).getMemberID() + "\\n whose name is: " + crawlMember.get(i).getFirstName() + " " + crawlMember.get(i).getLastName() + "\\nwho completed his lap in " + crawlMember.get(i).getCompetitionTime() + " seconds.\nLap was undertaken at: " + crawlMember.get(i).getCompetitionDate();
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Contestants not found in this discipline");
+
+        }
+        //Print
+        try {
+            for (int i = 0; i < 5; i++) {
+                System.out.println("These are the top five contestants within the discipline Butterfly: MemberID = " + butterflyMember.get(i).getMemberID() + "\\n whose name is: " + butterflyMember.get(i).getFirstName() + " " + crawlMember.get(i).getLastName() + "\\nwho completed his lap in " + butterflyMember.get(i).getCompetitionTime() + " seconds.\nLap was undertaken at: " + butterflyMember.get(i).getCompetitionDate();
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Contestants not found in this discipline");
+
+        //Print
+        try {
+            for (int i = 0; i < 5; i++) {
+                System.out.println("These are the top five contestants within the discipline Rygcrawl: MemberID = " + rygcrawlMember.get(i).getMemberID() + "\\n whose name is: " + rygcrawlMember.get(i).getFirstName() + " " + rygcrawlMember.get(i).getLastName() + "\\nwho completed his lap in " + rygcrawlMember.get(i).getCompetitionTime() + " seconds.\nLap was undertaken at: " + rygcrawlMember.get(i).getCompetitionDate();
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Contestants not found in this discipline");
+
+        //Print
+        }
+        try {
+            for (int i = 0; i < 5; i++) {
+                System.out.println("These are the top five contestants within the discipline BrystSvømning: MemberID = " + brystsvømningMember.get(i).getMemberID() + "\\n whose name is: " + brystsvømningMember.get(i).getFirstName() + " " + brystsvømningMember.get(i).getLastName() + "\\nwho completed his lap in " + brystsvømningMember.get(i).getCompetitionTime() + " seconds.\nLap was undertaken at: " + brystsvømningMember.get(i).getCompetitionDate();
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Contestants not found in this discipline");
+        }
+
+
+        System.out.println("Dear dipshit - these contestants are the following top 5 performers within the respective branch of swimming: " )
 
     }
 
 
 
-    //Indeler member i seniorhold eller juniorhold.
+
+        /*
+        for (Member temp : crawlMember) {
+
+        }
+
+        for (Member temp : butterflyMember) {
+
+        }
+
+        for (Member temp : rygcrawlMember) {
+
+        }
+
+        for (Member temp : brystsvømning) {
+        */
+
+    //Inddeler member i seniorhold eller juniorhold.
     public void divideCompetitionByAge(ArrayList<Member> members, ArrayList<Team> teamList) {
         Team juniorTeam = null;
         Team seniorTeam = null;
@@ -111,6 +206,7 @@ public class CompetitiveController implements IScannerInput{
                 seniorTeam = team;
             }
         }
+
 
         if (juniorTeam == null || seniorTeam == null) {
             System.out.println("Fejl: Junior- eller Seniorhold ikke fundet i teamList.");
@@ -177,7 +273,7 @@ public class CompetitiveController implements IScannerInput{
     }
 
     //Add trainer
-    public void addTrainer(ArrayList<Trainer> trainerList, ArrayList<Team> teamList){
+    public void addTrainer(ArrayList<Trainer> trainerList, ArrayList<Team> teamList) {
         String teamIDStr;
         String trainerIDStr;
 
@@ -212,19 +308,19 @@ public class CompetitiveController implements IScannerInput{
         System.out.println("Træner tilføjet!");
     }
 
-    public void registerTraining(ArrayList<Member> memberList){
-        for(Member member : memberList){
+    public void registerTraining(ArrayList<Member> memberList) {
+        for (Member member : memberList) {
             System.out.println("Navn: " + member.getFirstName() + " " + member.getLastName() + "\n" +
-                               "MedlemID: " + member.getId() + "\n" +
-                               "---------------------------------------------");
+                    "MedlemID: " + member.getId() + "\n" +
+                    "---------------------------------------------");
         }
         System.out.println("Vælg et medlemID fra overstående");
         stringInput = stringInput();
         String memberID = stringInput;
-        for(Member member : memberList){
+        for (Member member : memberList) {
             int totalSeconds;
 
-            if(memberID.equals(member.getId())){
+            if (memberID.equals(member.getId())) {
                 System.out.println("Indtast venligst dato for træningen i format; dd/mm/yyyy");
 
                 stringInput = stringInput();
@@ -251,15 +347,15 @@ public class CompetitiveController implements IScannerInput{
 
                 totalSeconds = (intMM * 60) + intSS;
 
-                Training training = new Training(memberID,totalSeconds, LocalDate.of(intYear, intMonth, intDay));
+                Training training = new Training(memberID, totalSeconds, LocalDate.of(intYear, intMonth, intDay));
 
                 //Hvis ArrayList<Training> har mindre end 5 entries bliver det bare tilføjet
-                if(member.getTrainingPerformance().size() < 5) {
+                if (member.getTrainingPerformance().size() < 5) {
                     member.getTrainingPerformance().add(training);
                 } else {
                     //Hvis ArrayList<Training> har 5 pladser, sorterer den ArrayListen finder den længste tid og erstatter den med den nye hvis den er mindre
                     member.getTrainingPerformance().sort(Training::compareTo);
-                    if(member.getTrainingPerformance().getLast().getLapTime() > totalSeconds) {
+                    if (member.getTrainingPerformance().getLast().getLapTime() > totalSeconds) {
                         member.getTrainingPerformance().set(4, training);
                     }
                 }
@@ -269,7 +365,7 @@ public class CompetitiveController implements IScannerInput{
     }
 
     @Override
-    public String stringInput(){
+    public String stringInput() {
         Scanner sc = new Scanner(System.in);
         try {
             stringInput = sc.nextLine();
@@ -283,5 +379,6 @@ public class CompetitiveController implements IScannerInput{
     @Override
     public int intInput() {
         return 0;
+
     }
 }
