@@ -62,12 +62,13 @@ public class Payment {
     }
 
     public void printSumOfpayment(ArrayList<Member> memberObjects) {
-        double sumOfPayemnts = 0.0;
+        double sumOfPayments = 0.0;
 
         try {
             for (Member temp : memberObjects) {
                 double singlePayment = temp.getPayment().getPaymentAmount();
-                sumOfPayments += singlePaymentAmount;
+                sumOfPayments += singlePayment;
+//                sumOfPayments += singlePaymentAmount;
             }
             System.out.println("Summen af indbetalinger ligger på nuværende tidspunkt på: " + sumOfPayments);
         }

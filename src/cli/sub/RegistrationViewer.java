@@ -47,9 +47,9 @@ public class RegistrationViewer implements IScannerInput, IViewer {
 
         switch (intInput){
             //Registrer medlem
-            case 1 -> {}
+            case 1 -> rc.registerMember(arrayContainer.getMemberList());
             //Registrer træner
-            case 2 -> {}
+            case 2 -> rc.registerTrainer(arrayContainer.getTrainerList());
             //Registrer bogholder
             case 3 -> rc.registerAccountant(arrayContainer.getAccountantList());
             //Registrer hold
