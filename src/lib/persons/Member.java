@@ -5,7 +5,6 @@ import lib.competitive.Team;
 import lib.competitive.Training;
 import lib.membership.Payment;
 import lib.membership.Membership;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -18,7 +17,7 @@ public class Member extends Person {
     private ArrayList<Training> trainingPerformance;
     private ArrayList<Competition> competitionPerformance;
 
-    public Member(String firstName, String lastName, int phoneNumber, Membership membership, String address, LocalDate age){
+    public Member(String firstName, String lastName, int phoneNumber, Membership membership, String address, LocalDate age) {
         super(firstName, lastName, phoneNumber);
         super.constructID(firstName, lastName);
         this.membership = membership;
@@ -27,8 +26,8 @@ public class Member extends Person {
         this.payment = new Payment(LocalDate.now(), age, getId());
     }
 
- {
-    public Member(String firstName, String lastName, int phoneNumber, Membership membership, Team team,  String address, LocalDate age, Payment payment, ArrayList<String> disciplines){
+
+    public Member(String firstName, String lastName, int phoneNumber, Membership membership, Team team, String address, LocalDate age, Payment payment, ArrayList<String> disciplines) {
         super(firstName, lastName, phoneNumber);
         super.constructID(firstName, lastName);
         this.membership = membership;
@@ -54,13 +53,16 @@ public class Member extends Person {
         return membership;
     }
 
-    public ArrayList<Training> getTrainingPerformance(){
+    public ArrayList<Training> getTrainingPerformance() {
         return trainingPerformance;
     }
 
-    public ArrayList<Competition> getCompetitionPerformance() { return competitionPerformance}
-
     public void setDisciplines(ArrayList<String> disciplines) {
         this.disciplines = disciplines;
+    }
+
+
+    public ArrayList<Competition> getCompetitionPerformance() {
+        return competitionPerformance;
     }
 }
