@@ -1,10 +1,12 @@
 package utils.controller;
 
+import lib.competitive.Competition;
 import lib.competitive.Team;
 import lib.competitive.Training;
 import lib.persons.Member;
 import lib.persons.Trainer;
 import utils.interfaces.IScannerInput;
+import utils.containers.ArrayContainer;
 
 import utils.containers.ArrayContainer;
 
@@ -67,6 +69,36 @@ public class CompetitiveController implements IScannerInput{
             }
         }
     }
+
+    //Find the top five contestants
+    public String printTopFive() {
+
+        //ArrayList that holds all members that have a Competition object with values.
+        ArrayList<Competition> tempCompetitors = new ArrayList<>();
+
+        //ArrayList for abovementioned objects, for parting into an ArrayList of each respective discpline.
+        ArrayList<Member> crawlMember = new ArrayList<>();
+        ArrayList<Member> butterflyMember = new ArrayList<>();
+        ArrayList<Member> rygcrawlMember = new ArrayList<>();
+        ArrayList<Member> brystsvømning = new ArrayList<>();
+
+        //memberList ligger i ArrayContainer class - hvorfor fanden genkender den ikke den i denne klasse?:'(
+        for (Member temp : memberList) {
+            //Is the respective member's competitionPerformance attribute empty for competition objects?
+            if (!tempCompetitors.getCompetitionPerformance().isEmpty()) {
+                tempCompetitors.add(temp);
+
+                for (Member temp2 : tempCompetitors) {
+                    switch (tem2.)
+                }
+
+            }
+        }
+
+
+    }
+
+
     //Add trainer
     public void addTrainer(ArrayList<Trainer> trainerList, ArrayList<Team> teamList){
         String teamIDStr;

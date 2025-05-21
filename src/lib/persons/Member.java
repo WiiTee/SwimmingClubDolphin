@@ -54,11 +54,11 @@ public class Member extends Person {
         return membership;
     }
 
-    public ArrayList<Training> getTrainingPerformance(){
+    public ArrayList<Training> getTrainingPerformance() {
         return trainingPerformance;
     }
 
-    public ArrayList<Competition> getCompetitionPerformance() { return competitionPerformance}
+    public ArrayList<Competition> getCompetitionPerformance() { return competitionPerformance; }
 
     public void setDisciplines(ArrayList<String> disciplines) {
         this.disciplines = disciplines;
