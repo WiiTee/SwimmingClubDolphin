@@ -39,7 +39,6 @@ public class RegistrationOfMember {
                     System.out.println("Invalid choice. Try again.");
             }
         }
-        sc.close();
     }
 
     public void registerMember() {
@@ -75,7 +74,8 @@ public class RegistrationOfMember {
             }
         }
 
-        Member newMember = new Member(firstName, lastName, age, phoneNumber, address, membershipType);
+        int phone = Integer.parseInt(phoneNumber);
+        Member newMember = new Member(firstName, lastName, phone, new Membership(membershipType), address, age);
         members.add(newMember);
 
         System.out.println("Member registered with ID: " + newMember.getId());
