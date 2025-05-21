@@ -1,6 +1,7 @@
 package lib.persons;
 
 import lib.competitive.Competition;
+import lib.competitive.Team;
 import lib.competitive.Training;
 import lib.membership.Payment;
 import lib.membership.Membership;
@@ -26,7 +27,7 @@ public class Member extends Person {
     }
 
 
-    public Member(String firstName, String lastName, int phoneNumber, Membership membership, String address, LocalDate age, Payment payment, ArrayList<String> disciplines) {
+    public Member(String firstName, String lastName, int phoneNumber, Membership membership, Team team, String address, LocalDate age, Payment payment, ArrayList<String> disciplines) {
         super(firstName, lastName, phoneNumber);
         super.constructID(firstName, lastName);
         this.membership = membership;
