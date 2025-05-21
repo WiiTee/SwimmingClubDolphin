@@ -1,10 +1,13 @@
 package cli.sub;
 
+import lib.persons.Member;
 import utils.controller.CompetitiveController;
 import utils.containers.ArrayContainer;
 import utils.interfaces.IScannerInput;
 import utils.interfaces.IViewer;
 
+
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class CompetitiveViewer implements IViewer, IScannerInput {
@@ -46,7 +49,7 @@ public class CompetitiveViewer implements IViewer, IScannerInput {
                 //Registrer træning
                 case 2 -> cc.registerTraining(arrayContainer.getMemberList());
                 //Registrer konkurrence
-                case 3 -> {}
+                case 3 -> cc.registrerCompetition(arrayContainer.getMemberList(), arrayContainer.getCompetitionList());
                 //Registrer træner
                 case 4 -> cc.addTrainer(arrayContainer.getTrainerList(), arrayContainer.getTeamList());
                 //Tilbage
