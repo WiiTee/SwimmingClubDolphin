@@ -26,6 +26,7 @@ public class PaymentViewer implements IScannerInput, IViewer {
             options();
             selection();
         }
+        isActive = true;
     }
 
     //Payment UI
