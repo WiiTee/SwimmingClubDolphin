@@ -38,4 +38,7 @@ public class Competition {
     public String getCompetitionTime() {
         return competitionTime;
     }
+
+
+
 }
