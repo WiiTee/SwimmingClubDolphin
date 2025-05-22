@@ -97,25 +97,29 @@ public class CompetitiveViewer implements IViewer, IScannerInput {
                     butterfly.sort(Comparator.comparingInt(a -> Integer.parseInt(a[3])));
                     System.out.println("Butterfly");
                     System.out.println("Medlems ID | Disciplin |  Placering | Konkurrence tid | Turnering");
-                    for (String[] arr : butterfly) {
+                    for (int i = 0; i < 5 && i < butterfly.size(); i++) {
+                        String[] arr = butterfly.get(i);
                         System.out.println(java.util.Arrays.toString(arr));
                     }
                     System.out.println("\nCrawl");
                     System.out.println("Medlems ID | Disciplin |  Placering | Konkurrence tid | Turnering");
                     crawl.sort(Comparator.comparingInt(a -> Integer.parseInt(a[3])));
-                    for (String[] arr : crawl) {
+                    for (int i = 0; i < 5 && i < crawl.size(); i++) {
+                        String[] arr = crawl.get(i);
                         System.out.println(java.util.Arrays.toString(arr));
                     }
                     System.out.println("\nRygcrawl");
                     System.out.println("Medlems ID | Disciplin |  Placering | Konkurrence tid | Turnering");
-                    backCrawl .sort(Comparator.comparingInt(a -> Integer.parseInt(a[3])));
-                    for (String[] arr : backCrawl) {
+                    backCrawl.sort(Comparator.comparingInt(a -> Integer.parseInt(a[3])));
+                    for (int i = 0; i < 5 && i < backCrawl.size(); i++) {
+                        String[] arr = backCrawl.get(i);
                         System.out.println(java.util.Arrays.toString(arr));
                     }
                     System.out.println("\nBrystsvømning");
                     System.out.println("Medlems ID | Disciplin |  Placering | Konkurrence tid | Turnering");
                     breastStroke.sort(Comparator.comparingInt(a -> Integer.parseInt(a[3])));
-                    for (String[] arr : breastStroke) {
+                    for (int i = 0; i < 5 && i < breastStroke.size(); i++) {
+                        String[] arr = breastStroke.get(i);
                         System.out.println(java.util.Arrays.toString(arr));
                     }
                 }

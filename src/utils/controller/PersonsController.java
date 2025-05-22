@@ -140,7 +140,7 @@ public class PersonsController implements IScannerInput{
                 if(answer.equalsIgnoreCase("Y")){
                     System.out.println("Medlem registreret og tilføjet til: Hold " + teamName);
                     dataRecord = new String[]{this.personId,teamName,discipline};
-                    fh.save(dataRecord,"competition.csv",true);
+                    fh.save(dataRecord,"teams.csv",true);
 
                     isRunning = false;
                     checkAnswers = false;

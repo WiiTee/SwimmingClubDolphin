@@ -49,8 +49,7 @@ public class MainViewer implements IScannerInput, IViewer {
                 1. Registrering
                 2. Betalingsoversigt
                 3. Medlemsoversigt
-                4. Konkurrencesv
-                ømning
+                4. Konkurrencesvømning
                 5. Luk
                 """);
     }
