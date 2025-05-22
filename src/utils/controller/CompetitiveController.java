@@ -53,15 +53,17 @@ public class CompetitiveController implements IScannerInput{
 
                 member.setDisciplines(disciplines);
 
-                System.out.println("Registrer hold");
+                System.out.println("Hvilket hold skal svømmer tilføjes til:");
                 for (Team team : teamList) {
                     System.out.println("Holdnavn: " + team.getTeamName() + " Team ID: " + team.getTeamID());
                 }
                 System.out.println("Indtast Hold navn");
                 stringInput = stringInput();
+                String teamName = stringInput;
                 for (Team team : teamList) {
-                    if (stringInput.equals(team.getTeamName())) {
+                    if (teamName.equals(team.getTeamName())) {
                         team.setSwimmers(member);
+                        member.setTeamName(teamName);
                     }
                 }
             }
@@ -103,7 +105,7 @@ public class CompetitiveController implements IScannerInput{
         System.out.println("Træner tilføjet!");
     }
 
-    public void registerTraining(ArrayList<Member> memberList){
+    public void registerTraining(ArrayList<Member> memberList, ArrayList<Training> trainingList){
         for(Member member : memberList){
             System.out.println("Navn: " + member.getFirstName() + " " + member.getLastName() + "\n" +
                                "MedlemID: " + member.getId() + "\n" +
@@ -142,16 +144,41 @@ public class CompetitiveController implements IScannerInput{
 
                 totalSeconds = (intMM * 60) + intSS;
 
-                Training training = new Training(memberID,totalSeconds, LocalDate.of(intYear, intMonth, intDay));
+                System.out.println("Indtast disciplin (butterfly, crawl, rygcrawl, brystswømning");
+                stringInput = stringInput();
+                String discipline = stringInput;
 
-                //Hvis ArrayList<Training> har mindre end 5 entries bliver det bare tilføjet
-                if(member.getTrainingPerformance().size() < 5) {
-                    member.getTrainingPerformance().add(training);
-                } else {
-                    //Hvis ArrayList<Training> har 5 pladser, sorterer den ArrayListen finder den længste tid og erstatter den med den nye hvis den er mindre
-                    member.getTrainingPerformance().sort(Training::compareTo);
-                    if(member.getTrainingPerformance().getLast().getLapTime() > totalSeconds) {
-                        member.getTrainingPerformance().set(4, training);
+                Training training = new Training(memberID,totalSeconds, LocalDate.of(intYear, intMonth, intDay), discipline);
+
+                //Hvis ArrayList<Training> ikke har en disciplin allerede
+                for(int z = 0; z < member.getTrainingPerformance().size(); z++) {
+                    if (!member.getTrainingPerformance().get(z).getDiscipline().equals(discipline)) {
+                        member.getTrainingPerformance().add(training);
+                        trainingList.add(training);
+                        break;
+                    } else {
+                        //Hvis ArrayList<Training> i member har 5 pladser, sorterer den ArrayListen finder den længste tid og erstatter den med den nye hvis den er mindre
+                        member.getTrainingPerformance().sort(Training::compareTo);
+                        for (int i = 0; i < member.getTrainingPerformance().size(); i++) {
+                            if (member.getTrainingPerformance().get(i).getDiscipline().equals(discipline)) {
+                                if (member.getTrainingPerformance().get(i).getLapTime() > totalSeconds) {
+                                    member.getTrainingPerformance().set(i, training);
+                                    break;
+                                }
+                            } else {
+                                member.getTrainingPerformance().add(training);
+                                break;
+                            }
+                        }
+                        //Tilføjer den til ArrayList<Training>
+                        for(int x = 0; x < trainingList.size(); x++){
+                            if(trainingList.get(x).getDiscipline().equals(discipline)){
+                                if(trainingList.get(x).getLapTime() > totalSeconds){
+                                    trainingList.set(x, training);
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
                 break;

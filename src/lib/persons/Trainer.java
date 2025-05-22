@@ -2,6 +2,7 @@ package lib.persons;
 
 public class Trainer extends Person{
     private String trainerID;
+    private String teamName;
 
     public Trainer(String firstName, String lastName, int phoneNumber){
         super(firstName, lastName, phoneNumber);
@@ -11,5 +12,9 @@ public class Trainer extends Person{
 
     public String getTrainerID() {
         return trainerID;
+    }
+
+    public void setTeamName(String teamName){
+        this.teamName = teamName;
     }
 }

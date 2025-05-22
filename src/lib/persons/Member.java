@@ -14,6 +14,7 @@ public class Member extends Person {
     private String address;
     private LocalDate age;
     private Payment payment;
+    private String teamName;
     private ArrayList<String> disciplines;
     private ArrayList<Training> trainingPerformance;
     private ArrayList<Competition> competitionPerformance;
@@ -24,7 +25,6 @@ public class Member extends Person {
         this.membership = membership;
         this.address = address;
         this.age = age;
-        this.payment = new Payment(LocalDate.now(), age, getId());
     }
 
     public Member(String firstName, String lastName, int phoneNumber, Membership membership, Team team,  String address, LocalDate age, Payment payment, ArrayList<String> disciplines){
@@ -59,5 +59,13 @@ public class Member extends Person {
 
     public void setDisciplines(ArrayList<String> disciplines) {
         this.disciplines = disciplines;
+    }
+
+    public void setTeamName(String teamName){
+        this.teamName = teamName;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

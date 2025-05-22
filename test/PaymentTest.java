@@ -30,18 +30,24 @@ public class PaymentTest {
 
     @Test
     void paymentSelector() {
-        Payment payment = new Payment(LocalDate.now(), LocalDate.of(1987, 11, 14), member.getId());
+        Member member1 = new Member("Jens", "Gotfredsen", 12345678, new Membership(Membership.MembershipType.KONKURRENCE, "test1"), "test", LocalDate.of(1987, 11, 14));
+        Payment payment = new Payment(LocalDate.now(), LocalDate.of(1987, 11, 14), member1.getId());
 
-        assertEquals(1800, payment.paymentSelector(LocalDate.of(1987, 11, 14)));
-        assertEquals(1350, payment.paymentSelector(LocalDate.of(1900, 1, 1)));
-        assertEquals(1000, payment.paymentSelector(LocalDate.of(2015, 1, 1)));
+        member1.setPayment(payment);
+        member1.getPayment().setPaymentAmount(member1);
+
+        assertEquals(1800, payment.paymentSelector(LocalDate.of(1987, 11, 14), member1));
+        assertEquals(1350, payment.paymentSelector(LocalDate.of(1950, 1, 1), member1));
+        assertEquals(1000, payment.paymentSelector(LocalDate.of(2015, 1, 1), member1));
+        member1.getMembership().isActive();
+        assertEquals(500, payment.paymentSelector(LocalDate.of(1987, 10, 14), member1));
     }
 
     @Test
     void setPaymentAmount() {
-        Payment payment = new Payment(LocalDate.now(), LocalDate.of(1987, 11, 14), member.getId());
-
-        payment.setPaymentAmount(member);
+        Payment payment = new Payment(LocalDate.now(), member.getAge(), member.getId());
+        member.setPayment(payment);
+        member.getPayment().setPaymentAmount(member);
 
         assertEquals(1800, payment.getPaymentAmount());
     }
@@ -54,10 +60,14 @@ public class PaymentTest {
 
         assertFalse(payment.getHasPaid());
 
+        System.out.println("Restance: " + payment.getHasPaid());
+
         payment.setLastPayment(LocalDate.of(2020, 10, 1));
         payment.setHasPaid();
 
         assertTrue(payment.getHasPaid());
+
+        System.out.println("Restance: " + payment.getHasPaid());
     }
 
     @Test

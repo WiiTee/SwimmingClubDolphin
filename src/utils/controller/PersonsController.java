@@ -4,6 +4,7 @@ import lib.persons.Accountant;
 import utils.interfaces.IScannerInput;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PersonsController implements IScannerInput{
@@ -81,7 +82,7 @@ public class PersonsController implements IScannerInput{
             intInput = sc.nextInt();
             return intInput;
 
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Error: Not an int input! " + e);
             return -1;
         }

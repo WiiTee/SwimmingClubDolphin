@@ -44,7 +44,7 @@ public class CompetitiveViewer implements IViewer, IScannerInput {
                 //Registrer svømmer
                 case 1 -> cc.addSwimmer(arrayContainer.getMemberList(), arrayContainer.getTeamList());
                 //Registrer træning
-                case 2 -> cc.registerTraining(arrayContainer.getMemberList());
+                case 2 -> cc.registerTraining(arrayContainer.getMemberList(), arrayContainer.getTrainingList());
                 //Registrer konkurrence
                 case 3 -> {}
                 //Registrer træner
