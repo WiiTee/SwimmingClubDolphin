@@ -61,23 +61,24 @@ public class MainViewer implements IScannerInput, IViewer {
             //Betalingsmenu
             case 2 -> pc.menu(arrayContainer);
             //Medlemsoversigt
-//            TODO: implement "load" fn
             case 3 -> {
                 var dataFileName = "members.csv";
                 var fh = new FileHandler();
                 var membersDataOutput = fh.load(dataFileName);
-//              Debug
-//                System.out.println(membersDataOutput);
+
                 if (membersDataOutput.isEmpty()){
                     System.out.println("\nIngen Data om registrerede medlemmer! - Registrer medlemmer i menuen for at se dem her!\n");
                     return;
                 }
-//              Tested ^^^
 
                 System.out.println("\nNuværende registrerede medlemmer! - Registrer medlemmer i menuen for at se dem her!\n");
-                System.out.println("Navn | Efternavn | Alder | Telefon ");
+                System.out.println("Medlems ID | Hold");
                 for(String[] data : membersDataOutput){
-                    System.out.println(data[0] + " " + data[1] + " " + data[2]);
+                    if (data.length > 1){
+                        System.out.println(data[0] + " " + data[1]);
+                        continue;
+                    }
+                    System.out.println(data[0]);
                 }
                 System.out.println();
             }

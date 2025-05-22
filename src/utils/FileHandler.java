@@ -113,7 +113,7 @@ public class FileHandler implements IFileHandler {
      * </ul>
      * </p>
      *
-     * @param records ArrayList of objects to be written (uses toString() conversion)
+     * @param record ArrayList of objects to be written (uses toString() conversion)
      * @param fileName name of the target file in data directory (e.g., "output.csv")
      * @throws RuntimeException if any I/O error occurs, including:
      *         <ul>
@@ -122,19 +122,19 @@ public class FileHandler implements IFileHandler {
      *           <li>Disk full condition</li>
      *         </ul>
      */
-    public void save(ArrayList<String[]> records, String fileName) {
+    public void save(String[] record, String fileName,boolean append) {
         // Get verified file path using fileIOSetup utility
         String dataDir = fileIOSetup(fileName);
 
         try {
             // Create writer with append mode enabled (preserves existing content)
-            BufferedWriter writer = new BufferedWriter(new FileWriter(dataDir, true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(dataDir, append));
 
             // Write each record with leading newline
-            for (String[] record : records) {
+//            for (String[] record : records) {
                 // Convert object to string and prepend newline
                 writer.append("\n").append(String.join(",",record));
-            }
+//            }
 
             // Explicitly close writer to flush buffers
             writer.close();

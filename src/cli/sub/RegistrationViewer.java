@@ -19,11 +19,13 @@ public class RegistrationViewer implements IScannerInput, IViewer {
     //Indeholder options (som er UI) og selection som er controller
     //Tager ArrayContainer med som argument så det kan gemmes til senere save/load.
     public void menu(ArrayContainer arrayContainer){
-        this.arrayContainer = arrayContainer;
+
+        rc.registerPerson();
         while(isActive) {
             options();
             selection();
         }
+        isActive = true;
     }
 
     //UI delen af registrer menuen
@@ -35,8 +37,6 @@ public class RegistrationViewer implements IScannerInput, IViewer {
                 
                 1. Registrer medlem
                 2. Registrer træner
-                3. Registrer bogholder
-                4. Registrer hold
                 5. Tilbage
                 """);
     }
@@ -47,13 +47,15 @@ public class RegistrationViewer implements IScannerInput, IViewer {
 
         switch (intInput){
             //Registrer medlem
-            case 1 -> rc.registerMember(arrayContainer.getMemberList());
+            case 1 -> {
+                rc.registerMember();
+                isActive = false;
+            }
             //Registrer træner
-            case 2 -> rc.registerTrainer(arrayContainer.getTrainerList());
-            //Registrer bogholder
-            case 3 -> rc.registerAccountant(arrayContainer.getAccountantList());
-            //Registrer hold
-            case 4 -> {}
+            case 2 -> {
+                rc.registerTrainer();
+                isActive = false;
+            }
             //Tilbage
             case 5 -> isActive = false;
         }

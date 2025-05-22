@@ -11,16 +11,28 @@ public class Person {
         ADMIN
     }
 
+    public String id;
     private String firstName;
     private String lastName;
     private int phoneNumber;
-    private String id;
+    private String address;
+    private int age;
 
-    public Person(String firstName, String lastName, int phoneNumber){
+    public String[] personRecord;
+
+    public Person(String firstName, String lastName, int phoneNumber) {
+    }
+    public Person(String firstName, String lastName, int phoneNumber,String address, int age){
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.age = age;
+
         this.id = constructID(firstName, lastName);
+
+        this.personRecord = new String[]{this.id,firstName, lastName, String.valueOf(phoneNumber),address, String.valueOf(age)};
+
     }
 
     public String getId() {

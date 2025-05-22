@@ -1,10 +1,12 @@
 package cli.sub;
 
+import utils.FileHandler;
 import utils.containers.ArrayContainer;
 import utils.controller.MembershipController;
 import utils.interfaces.IScannerInput;
 import utils.interfaces.IViewer;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PaymentViewer implements IScannerInput, IViewer {
@@ -46,11 +48,86 @@ public class PaymentViewer implements IScannerInput, IViewer {
         intInput = intInput();
         switch (intInput){
             //Betalingsoversigt
-            case 1 -> {}
+            case 1 -> {
+                var dataFileName = "payments.csv";
+                var fh = new FileHandler();
+                var membersDataOutput = fh.load(dataFileName);
+
+                if (membersDataOutput.isEmpty()){
+                    System.out.println("\nIngen Data om betaling for registrerede medlemmer! - Registrer betaling af medlemmer i menuen for at se dem her!\n");
+                    return;
+                }
+
+                System.out.println("\nNuværende betalende medlemmer! - Registrer betaling af medlemmer i menuen for at se dem her!\n");
+                System.out.println("Medlems ID | Betalende");
+                for(String[] data : membersDataOutput){
+                    if (data.length > 1){
+                        String hasPaid = "ja";
+                        if (data[1].equals("2")){
+                            hasPaid =  "nej";
+                        }
+                        System.out.println(data[0] + " " + hasPaid);
+                        continue;
+                    }
+                    System.out.println(data[0]);
+                }
+                System.out.println();}
             //Check restance
-            case 2 -> mc.checkDebt(arrayContainer.getMemberList());
+            case 2 -> {
+                var dataFileName = "payments.csv";
+                var fh = new FileHandler();
+                var paymentsDataOutput = fh.load(dataFileName);
+//                mc.checkDebt(arrayContainer.getMemberList());
+                for(String[] data : paymentsDataOutput){
+                    if (data.length > 1){
+                        if(data[1].equals("2")){
+                            System.out.println(data[0] + " " + data[1]);
+                        }
+                        continue;
+                    }
+                    System.out.println(data[0]);
+
+                }
+            }
             //Betal regning
-            case 3 -> mc.updateLastPaid(arrayContainer.getMemberList());
+            case 3 -> {
+
+                System.out.println("Hvilket medlems betaling skal registreres?\nSkriv medlems ID:");
+                stringInput = stringInput();
+                String memberId = stringInput;
+
+//                mc.updateLastPaid(arrayContainer.getMemberList());
+                var dataFileName = "payments.csv";
+                var fh = new FileHandler();
+                var paymentsDataOutput = fh.load(dataFileName);
+
+                var isPaid = new ArrayList<String[]>();
+                var isNotPaid = new ArrayList<String[]>();
+
+//                mc.checkDebt(arrayContainer.getMemberList());
+                for(String[] data : paymentsDataOutput){
+                    if (data.length > 1){
+                        if(data[1].equals("2")){
+                            if(data[0].equals(memberId)){
+                                data[1] = "1";
+                                System.out.println(data[0] + " " + data[1]);
+                                fh.save(data,"payments.csv",false);
+                                continue;
+                            }
+                            isNotPaid.add(data);
+                            continue;
+                        }
+                        isPaid.add(data);
+                    }
+                }
+
+                isPaid.addAll(isNotPaid);
+                for(String[] record : isPaid){
+                    fh.save(record,"payments.csv",true);
+                }
+
+
+            }
             //Opdater betalingssum for alle medlemmer
             case 4 -> mc.updatePaymentAmount(arrayContainer.getMemberList());
             //Tilbage
