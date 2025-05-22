@@ -92,7 +92,6 @@ public class PaymentViewer implements IScannerInput, IViewer {
             }
             //Betal regning
             case 3 -> {
-
                 System.out.println("Hvilket medlems betaling skal registreres?\nSkriv medlems ID:");
                 stringInput = stringInput();
                 String memberId = stringInput;
@@ -126,7 +125,6 @@ public class PaymentViewer implements IScannerInput, IViewer {
                 for(String[] record : isPaid){
                     fh.save(record,"payments.csv",true);
                 }
-
 
             }
             //Opdater betalingssum for alle medlemmer
