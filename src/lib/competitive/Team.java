@@ -10,6 +10,9 @@ public class Team {
     private String teamName;
     private ArrayList<Member> swimmers;
     private Trainer trainer;
+    private Team seniorTeam;
+    private Team juniorTeam;
+
 
     public Team(String teamName){
         this.teamName = teamName;
@@ -37,5 +40,13 @@ public class Team {
 
     public void setSwimmers(Member member) {
         swimmers.add(member);
+    }
+
+    public Team getSeniorTeam() {
+        return seniorTeam;
+    }
+
+    public Team getJuniorTeam() {
+        return juniorTeam;
     }
 }

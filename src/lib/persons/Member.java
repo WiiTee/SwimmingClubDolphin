@@ -5,7 +5,6 @@ import lib.competitive.Team;
 import lib.competitive.Training;
 import lib.membership.Payment;
 import lib.membership.Membership;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -17,6 +16,7 @@ public class Member extends Person {
     private ArrayList<String> disciplines;
     private ArrayList<Training> trainingPerformance;
     private ArrayList<Competition> competitionPerformance;
+
 
     public Member(String firstName, String lastName, int phoneNumber, String address, LocalDate age){
         super(firstName, lastName, phoneNumber);
@@ -55,10 +55,14 @@ public class Member extends Person {
         return trainingPerformance;
     }
 
+    public ArrayList<Competition> getCompetitionPerformance() { 
+        return competitionPerformance;
+    }
+
     public void setDisciplines(ArrayList<String> disciplines) {
         this.disciplines = disciplines;
     }
-
+  
     public void setMembership(Membership membership) {
         this.membership = membership;
     }

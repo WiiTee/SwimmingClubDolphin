@@ -9,6 +9,7 @@ public class Competition {
     private LocalDate competitionDate;
     private String discipline;
 
+
     //Opretter Competition objekter
     public Competition(String competitionTime, String competitionName, LocalDate competitionDate, String discipline, String memberID){
         this.competitionTime = competitionTime;
@@ -37,4 +38,7 @@ public class Competition {
     public String getCompetitionTime() {
         return competitionTime;
     }
+
+
+
 }
