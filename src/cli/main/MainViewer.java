@@ -41,7 +41,7 @@ public class MainViewer implements IScannerInput, IViewer {
                 """);
 
         System.out.println("Now loading files, please hang on!");
-        arrayContainer.loadMember();
+        arrayContainer.load();
     }
 
     public void options(){
@@ -53,8 +53,7 @@ public class MainViewer implements IScannerInput, IViewer {
                 1. Registrering
                 2. Betalingsoversigt
                 3. Medlemsoversigt
-                4. Konkurrencesv
-                ømning
+                4. Konkurrencesvømning
                 5. Luk
                 """);
     }
@@ -75,8 +74,14 @@ public class MainViewer implements IScannerInput, IViewer {
                 arrayContainer.createFiles("memberlist.csv");
                 arrayContainer.createFiles("paymentlist.csv");
                 arrayContainer.createFiles("membershiplist.csv");
+                arrayContainer.createFiles("trainerlist.csv");
+                arrayContainer.createFiles("teamlist.csv");
 
-                arrayContainer.save(arrayContainer.getMemberList());
+                arrayContainer.saveMember(arrayContainer.getMemberList());
+                arrayContainer.saveTrainer(arrayContainer.getTrainerList());
+                arrayContainer.saveTeam(arrayContainer.getTeamList());
+
+                isActive = false;
             }
         }
     }

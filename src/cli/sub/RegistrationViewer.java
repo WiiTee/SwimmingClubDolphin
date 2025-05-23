@@ -1,6 +1,7 @@
 package cli.sub;
 
 import utils.containers.ArrayContainer;
+import utils.controller.CompetitiveController;
 import utils.controller.PersonsController;
 import utils.interfaces.IScannerInput;
 import utils.interfaces.IViewer;
@@ -15,13 +16,13 @@ public class RegistrationViewer implements IScannerInput, IViewer {
     private ArrayContainer arrayContainer;
 
     PersonsController rc = new PersonsController();
+    CompetitiveController cc = new CompetitiveController();
 
     //MainViewer for registrering af medlemmer, trænere m.m
     //Indeholder options (som er UI) og selection som er controller
     //Tager ArrayContainer med som argument så det kan gemmes til senere save/load.
     public void menu(ArrayContainer arrayContainer){
-
-        rc.registerPerson();
+        this.arrayContainer = arrayContainer;
         while(isActive) {
             options();
             selection();
@@ -51,7 +52,7 @@ public class RegistrationViewer implements IScannerInput, IViewer {
             //Registrer medlem
             case 1 -> rc.registerMember(arrayContainer.getMemberList());
             //Registrer træner
-            case 2 -> 
+            case 2 -> rc.registerTrainer(arrayContainer.getTrainerList());
             //Registrer bogholder
             case 3 -> {
                 rc.registerAccountant(arrayContainer.getAccountantList());
@@ -59,7 +60,7 @@ public class RegistrationViewer implements IScannerInput, IViewer {
                 //System.out.println(arrayContainer.getAccountantList().get(0).getFirstName());
             }
             //Registrer hold
-            case 4 -> {}
+            case 4 -> cc.addTeam(arrayContainer.getTeamList());
             //Tilbage
             case 5 -> isActive = false;
         }

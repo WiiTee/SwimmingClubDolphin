@@ -5,8 +5,12 @@ public class Trainer extends Person{
 
     public Trainer(String firstName, String lastName, int phoneNumber){
         super(firstName, lastName, phoneNumber);
-        super.constructID(firstName, lastName);
         this.trainerID = super.constructAccessID();
+    }
+
+    public Trainer(String firstName, String lastName, int phoneNumber, String id, String trainerID){
+        super(firstName, lastName, phoneNumber, id);
+        this.trainerID = trainerID;
     }
 
     public String getTrainerID() {

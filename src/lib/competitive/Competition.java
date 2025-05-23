@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class Competition {
     private String memberID;
-    private String competitionTime;
+    private int competitionTime;
     private String competitionName;
     private LocalDate competitionDate;
     private String discipline;
 
 
     //Opretter Competition objekter
-    public Competition(String competitionTime, String competitionName, LocalDate competitionDate, String discipline, String memberID){
+    public Competition(int competitionTime, String competitionName, LocalDate competitionDate, String discipline, String memberID){
         this.competitionTime = competitionTime;
         this.memberID = memberID;
         this.competitionName = competitionName;
@@ -35,7 +35,7 @@ public class Competition {
         return competitionName;
     }
 
-    public String getCompetitionTime() {
+    public int getCompetitionTime() {
         return competitionTime;
     }
 

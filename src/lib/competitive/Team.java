@@ -8,14 +8,12 @@ import java.util.ArrayList;
 public class Team {
     private String teamType;
     private String teamName;
-    private ArrayList<Member> swimmers;
+    private ArrayList<Member> swimmers = new ArrayList<>();
     private Trainer trainer;
-    private Team seniorTeam;
-    private Team juniorTeam;
 
-
-    public Team(String teamName){
+    public Team(String teamName, String teamType){
         this.teamName = teamName;
+        this.teamType = teamType;
     }
 
     public String getTeamName() {
@@ -40,13 +38,5 @@ public class Team {
 
     public void setSwimmers(Member member) {
         swimmers.add(member);
-    }
-
-    public Team getSeniorTeam() {
-        return seniorTeam;
-    }
-
-    public Team getJuniorTeam() {
-        return juniorTeam;
     }
 }

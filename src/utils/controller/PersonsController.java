@@ -4,6 +4,7 @@ import lib.membership.Membership;
 import lib.membership.Payment;
 import lib.persons.Accountant;
 import lib.persons.Member;
+import lib.persons.Trainer;
 import utils.interfaces.IScannerInput;
 
 import java.time.LocalDate;
@@ -17,10 +18,94 @@ public class PersonsController implements IScannerInput{
     private String stringInput;
     private int intInput;
 
-    public void registerMember(){
+    //Registrerer en bogholder
+    public void registerAccountant(ArrayList<Accountant> arrayList){
         String answer;
         boolean checkAnswers = true;
         boolean isRunning = true;
+
+        System.out.println("""
+                #######################
+                # Registrer Bogholder #
+                #######################
+                """);
+
+        while(isRunning) {
+            System.out.println("Indtast fornavn: ");
+            stringInput = stringInput();
+            String firstName = stringInput;
+
+            System.out.println("Indtast efternavn");
+            stringInput = stringInput();
+            String lastName = stringInput;
+
+            System.out.println("Indtast telefon nummer");
+            intInput = intInput();
+            int phoneNo = intInput;
+
+            //Validering inden den opretter objektet
+            while(checkAnswers) {
+                System.out.println("Er disse oplysninger korrekte? Y/N" + "\n" +
+                            "Fornavn: " + firstName + "\n" +
+                            "Efternavn: " + lastName + "\n" +
+                            "Telefon: " + phoneNo);
+
+                answer = stringInput();
+                if (answer.equalsIgnoreCase("Y")) {
+                    Accountant accountant = new Accountant(firstName, lastName, phoneNo);
+                    arrayList.add(accountant);
+                    System.out.println("Bogholder tilføjet!");
+                    isRunning = false;
+                    checkAnswers = false;
+                } else if (answer.equalsIgnoreCase("N")) {
+                    System.out.println("Prøv igen!");
+                    checkAnswers = false;
+                } else {
+                    System.out.println("Error: Skriv Y eller N");
+                }
+            }
+        }
+    }
+
+    public void registerTrainer(ArrayList<Trainer> trainers){
+        boolean isRegistering = true;
+        boolean checkingAnswers = true;
+        String firstName = "";
+        String lastName = "";
+        int phoneNo = 0;
+        while(isRegistering) {
+            System.out.println("Indtast fornavn: ");
+            stringInput = stringInput();
+            firstName = stringInput;
+            System.out.println("Indtast efternavn");
+            stringInput = stringInput();
+            lastName = stringInput;
+            System.out.println("Indtast telefon nummer");
+            intInput = intInput();
+            phoneNo = intInput;
+
+            while(checkingAnswers) {
+            System.out.println("Er disse oplysninger korrekte brug Y/N: " + "\n" +
+                               "Navn: " + firstName + "\n" +
+                               "Efternavn: " + lastName + "\n" +
+                               "Telefon: " + phoneNo);
+
+                stringInput = stringInput();
+                String checkAnswer = stringInput;
+                if(checkAnswer.equalsIgnoreCase("Y")){
+                    checkingAnswers = false;
+                } else if(checkAnswer.equalsIgnoreCase("N")){
+                    System.out.println("Starter registreringen forfra!");
+                    checkingAnswers = false;
+                } else {
+                    System.out.println("Error: Skriv Y eller N");
+                }
+            }
+            isRegistering = false;
+        }
+        Trainer trainer = new Trainer(firstName, lastName, phoneNo);
+        trainers.add(trainer);
+    }
 
     public void registerMember(ArrayList<Member> members) {
         System.out.println("Enter your first name: ");

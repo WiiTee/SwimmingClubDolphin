@@ -42,12 +42,26 @@ public class MembershipController implements IScannerInput {
 
     //Checker alle medlemmer igennem og printer dem i restance!
     public void checkDebt(ArrayList<Member> arrList){
-        for(Member list : arrList){
-            if(!list.getPayment().getHasPaid()){
-                System.out.println("Medlem ID; " + list.getId() +
-                                   ", Navn; " + list.getFirstName() + " " + list.getLastName() +
-                                   ". Er i restance!");
+        boolean noDebt = false;
+        boolean checkingDebt = true;
+        while(checkingDebt){
+            if(!noDebt) {
+                for (Member list : arrList) {
+                    if (!list.getPayment().getHasPaid()) {
+                        System.out.println("Medlem ID; " + list.getId() +
+                                ", Navn; " + list.getFirstName() + " " + list.getLastName() +
+                                ". Er i restance!");
+
+                        noDebt = false;
+                    }
+                    else {
+                        noDebt = true;
+                    }
+                }
+            } else {
+                System.out.println("Der er ingen i restance!");
             }
+            checkingDebt = false;
         }
     }
 
