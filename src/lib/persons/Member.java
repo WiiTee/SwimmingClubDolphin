@@ -59,6 +59,10 @@ public class Member extends Person {
         return competitionPerformance;
     }
 
+    public ArrayList<Competition> getCompetitionPerformance() {
+        return competitionPerformance;
+    }
+
     public void setDisciplines(ArrayList<String> disciplines) {
         this.disciplines = disciplines;
     }

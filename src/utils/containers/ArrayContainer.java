@@ -8,8 +8,6 @@ import lib.membership.Payment;
 import lib.persons.Accountant;
 import lib.persons.Member;
 import lib.persons.Trainer;
-import utils.FileHandler;
-
 
 import java.io.*;
 import java.time.LocalDate;
@@ -23,6 +21,8 @@ public class ArrayContainer {
     private ArrayList<Member> memberList = new ArrayList<>();
     private ArrayList<Accountant> accountantList = new ArrayList<>();
     private ArrayList<Trainer> trainerList = new ArrayList<>();
+
+    private ArrayList<Payment> paymentsList = new ArrayList<>();
 
     private ArrayList<Team> teamList = new ArrayList<>();
     private ArrayList<Competition> competitionList = new ArrayList<>();
@@ -69,7 +69,6 @@ public class ArrayContainer {
             //e.printStackTrace();
         }
     }
-  
     public void save(ArrayList<Member> memberList){
         try {
             //Gemmer medlemsdataer i memberlist.csv
