@@ -13,6 +13,7 @@ public class Member extends Person {
     private String address;
     private LocalDate age;
     private Payment payment;
+    private String teamName;
     private ArrayList<String> disciplines;
     private ArrayList<Training> trainingPerformance;
     private ArrayList<Competition> competitionPerformance;
@@ -20,19 +21,14 @@ public class Member extends Person {
 
     public Member(String firstName, String lastName, int phoneNumber, String address, LocalDate age){
         super(firstName, lastName, phoneNumber);
-        super.constructID(firstName, lastName);
         this.address = address;
         this.age = age;
     }
 
     public Member(String id, String firstName, String lastName, int phoneNumber, String address, LocalDate age){
-        super(firstName, lastName, phoneNumber);
-        super.setId(id);
-        this.membership = membership;
+        super(firstName, lastName, phoneNumber, id);
         this.address = address;
         this.age = age;
-        this.payment = payment;
-        this.disciplines = disciplines;
     }
 
     public LocalDate getAge() {
@@ -59,10 +55,6 @@ public class Member extends Person {
         return competitionPerformance;
     }
 
-    public ArrayList<Competition> getCompetitionPerformance() {
-        return competitionPerformance;
-    }
-
     public void setDisciplines(ArrayList<String> disciplines) {
         this.disciplines = disciplines;
     }
@@ -73,5 +65,13 @@ public class Member extends Person {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public String getTeamName() {
+        return teamName;
     }
 }

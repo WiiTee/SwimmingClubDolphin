@@ -69,7 +69,7 @@ public class ArrayContainer {
             //e.printStackTrace();
         }
     }
-    public void save(ArrayList<Member> memberList){
+    public void saveMember(ArrayList<Member> memberList){
         try {
             //Gemmer medlemsdataer i memberlist.csv
             FileWriter fileWriter = new FileWriter("resources/memberlist.csv");
@@ -81,9 +81,16 @@ public class ArrayContainer {
                 String phoneNumber = String.valueOf(member.getPhoneNumber());
                 String address = member.getAddress();
                 String age = member.getAge().toString();
+                String teamName;
+                if(member.getTeamName() != null){
+                    teamName = member.getTeamName();
+                } else {
+                    teamName = "NoTeam";
+                }
 
                 bufferedWriter.write(id + "," + firstName + "," + lastName + "," +
-                                     phoneNumber + "," + address + "," + age);
+                                     phoneNumber + "," + address + "," + age + "," + teamName);
+                bufferedWriter.newLine();
             }
             bufferedWriter.close();
             fileWriter.close();
@@ -98,6 +105,7 @@ public class ArrayContainer {
                 String payAmount = String.valueOf(payment.getPayment().getPaymentAmount());
                 String hasPaid = String.valueOf(payment.getPayment().getHasPaid());
                 bufferedWriter2.write(id + "," + subDate + "," + lastDate + "," + payAmount + "," + hasPaid);
+                bufferedWriter2.newLine();
             }
             bufferedWriter2.close();
             fileWriter2.close();
@@ -110,15 +118,58 @@ public class ArrayContainer {
                 String type = membership.getMembership().getMembershipType().getType();
                 String active = String.valueOf(membership.getMembership().getIsActive());
                 bufferedWriter3.write(id + "," + type + "," + active);
+                bufferedWriter3.newLine();
             }
             bufferedWriter3.close();
             fileWriter3.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Member could not be created: " + e.getMessage());
         }
     }
 
-    public void loadMember(){
+    public void saveTrainer(ArrayList<Trainer> trainerList){
+        try {
+            //Gemmer trænere i trainerlist.csv
+            FileWriter fileWriter = new FileWriter("resources/trainerlist.csv");
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Trainer trainer : trainerList) {
+                String id = trainer.getId();
+                String firstName = trainer.getFirstName();
+                String lastName = trainer.getLastName();
+                String phoneNumber = String.valueOf(trainer.getPhoneNumber());
+                String trainerID = String.valueOf(trainer.getTrainerID());
+
+                bufferedWriter.write(id + "," + firstName + "," + lastName + "," +
+                        phoneNumber + "," + trainerID);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Trainer could not be created: " + e.getMessage());
+        }
+    }
+
+    public void saveTeam(ArrayList<Team> teamList){
+        try{
+            //Gemmer team i teamlist.csv
+            FileWriter fileWriter = new FileWriter("resources/teamlist.csv");
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Team team : teamList) {
+                String teamName = team.getTeamName();
+                String teamType = team.getTeamType();
+
+                bufferedWriter.write(teamName + "," + teamType);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Team could not be created: " + e.getMessage());
+        }
+    }
+
+    public void load(){
         try{
             Scanner scanner = new Scanner(new File("resources/memberlist.csv"));
             while(scanner.hasNextLine()){
@@ -141,6 +192,23 @@ public class ArrayContainer {
             }
             scanner3.close();
 
+            if(new File("resources/trainerlist.csv").exists()){
+                Scanner scanner4 = new Scanner(new File("resources/trainerlist.csv"));
+                while(scanner4.hasNextLine()){
+                    String[] arr = scanner4.nextLine().split(",");
+                    createTrainer(arr);
+                }
+                scanner4.close();
+            }
+            if(new File("resources/teamlist.csv").exists()){
+                Scanner scanner5 = new Scanner(new File("resources/teamlist.csv"));
+                while(scanner5.hasNextLine()){
+                    String[] arr = scanner5.nextLine().split(",");
+                    createTeam(arr);
+                }
+                scanner5.close();
+            }
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -153,9 +221,15 @@ public class ArrayContainer {
         int phoneNumber = Integer.parseInt(arr[3]);
         String address = arr[4];
         LocalDate age = LocalDate.parse(arr[5]);
+        String teamName = arr[6];
 
         Member member = new Member(id, firstName, lastName, phoneNumber, address, age);
-        memberList.add(member);
+        if(!teamName.equals("NoTeam")){
+            member.setTeamName(teamName);
+            memberList.add(member);
+        } else {
+            memberList.add(member);
+        }
     }
 
     public void createPayment(String[] arr){
@@ -202,5 +276,34 @@ public class ArrayContainer {
                 System.out.println("Error: Member does not exist");
             }
         }
+    }
+
+    public void createTrainer(String[] arr){
+        String id = arr[0];
+        String firstName = arr[1];
+        String lastName = arr[2];
+        int phoneNumber = Integer.parseInt(arr[3]);
+        String trainerID = arr[4];
+
+        Trainer trainer = new Trainer(firstName, lastName, phoneNumber, id, trainerID);
+
+        trainerList.add(trainer);
+    }
+
+    public void createTeam(String[] arr){
+        String teamName = arr[0];
+        String teamType = arr[1];
+
+        Team team = new Team(teamName, teamType);
+        if(!memberList.isEmpty()){
+            for (Member member : memberList) {
+                if (member.getTeamName() != null) {
+                    team.getSwimmers().add(member);
+                }
+            }
+        } else {
+            System.out.println("Team har ikke nogen medlemmer!");
+        }
+        teamList.add(team);
     }
 }

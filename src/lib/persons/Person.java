@@ -15,24 +15,19 @@ public class Person {
     private String firstName;
     private String lastName;
     private int phoneNumber;
-    private String address;
-    private int age;
 
-    public String[] personRecord;
-
-    public Person(String firstName, String lastName, int phoneNumber) {
-    }
-    public Person(String firstName, String lastName, int phoneNumber,String address, int age){
+    public Person(String firstName, String lastName, int phoneNumber){
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.age = age;
-
         this.id = constructID(firstName, lastName);
+    }
 
-        this.personRecord = new String[]{this.id,firstName, lastName, String.valueOf(phoneNumber),address, String.valueOf(age)};
-
+    public Person(String firstName, String lastName, int phoneNumber, String id){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.id = id;
     }
 
     public String getId() {
@@ -53,6 +48,18 @@ public class Person {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String constructID(String firstName, String lastName){

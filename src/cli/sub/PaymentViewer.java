@@ -48,7 +48,7 @@ public class PaymentViewer implements IScannerInput, IViewer {
         intInput = intInput();
         switch (intInput){
             //Betalingsoversigt
-            case 1 -> {}
+            case 1 -> mc.printSumOfpayment(arrayContainer.getMemberList());
             //Check restance
             case 2 -> mc.checkDebt(arrayContainer.getMemberList());
             //Betal regning
