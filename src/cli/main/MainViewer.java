@@ -1,6 +1,7 @@
 package cli.main;
 
 import cli.sub.CompetitiveViewer;
+import utils.FileHandler;
 import utils.containers.ArrayContainer;
 import utils.interfaces.IScannerInput;
 import utils.interfaces.IViewer;
@@ -28,6 +29,7 @@ public class MainViewer implements IScannerInput, IViewer {
             options();
             selection();
         }
+        isActive = true;
     }
 
     //Velkomst tekst
@@ -51,7 +53,8 @@ public class MainViewer implements IScannerInput, IViewer {
                 1. Registrering
                 2. Betalingsoversigt
                 3. Medlemsoversigt
-                4. Konkurrencesvømning
+                4. Konkurrencesv
+                ømning
                 5. Luk
                 """);
     }

@@ -1,5 +1,7 @@
 package cli.sub;
 
+import lib.persons.Member;
+import utils.FileHandler;
 import utils.controller.CompetitiveController;
 import utils.containers.ArrayContainer;
 import utils.interfaces.IScannerInput;
@@ -23,6 +25,7 @@ public class CompetitiveViewer implements IViewer, IScannerInput {
             options();
             selection();
         }
+        isActive = true;
     }
 
     public void options(){

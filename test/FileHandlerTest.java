@@ -51,10 +51,12 @@ class FileHandlerTest {
     @Test
     void testSave(){
         var fh = new FileHandler();
-        var mockOut = new ArrayList<String[]>();
-        System.out.println(Arrays.toString(mockRecord));
-        mockOut.add(mockRecord);
-        fh.save(mockOut,fileName);
+//        var mockOut = new ArrayList<String[]>();
+//        String[] mockOut =  mockRecord.clone();
+////        var mockOut = String[];
+//        System.out.println(Arrays.toString(mockRecord));
+//        mockOut.add(mockRecord);
+        fh.save(mockRecord,fileName,true);
     }
 
   @Test

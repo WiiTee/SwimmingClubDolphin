@@ -1,6 +1,7 @@
 package lib.membership;
 
 import lib.persons.Member;
+import java.util.ArrayList;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -54,7 +55,6 @@ public class Payment {
         } else {
             return 500;
         }
-
     }
 
     public void setPaymentAmount(Member member) {
@@ -72,6 +72,7 @@ public class Payment {
     public void loadHasPaid(boolean hasPaid) {
         this.hasPaid = hasPaid;
     }
+  
     public void loadPaymentAmount(double paymentAmount) {
         this.paymentAmount = paymentAmount;
     }

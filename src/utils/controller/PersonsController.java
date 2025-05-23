@@ -8,6 +8,7 @@ import utils.interfaces.IScannerInput;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class PersonsController implements IScannerInput{
@@ -16,55 +17,10 @@ public class PersonsController implements IScannerInput{
     private String stringInput;
     private int intInput;
 
-    //Registrerer en bogholder
-    public void registerAccountant(ArrayList<Accountant> arrayList){
+    public void registerMember(){
         String answer;
         boolean checkAnswers = true;
         boolean isRunning = true;
-
-        System.out.println("""
-                #######################
-                # Registrer Bogholder #
-                #######################
-                """);
-
-        while(isRunning) {
-            System.out.println("Indtast fornavn: ");
-            stringInput = stringInput();
-            String firstName = stringInput;
-
-            System.out.println("Indtast efternavn");
-            stringInput = stringInput();
-            String lastName = stringInput;
-
-            System.out.println("Indtast telefon nummer");
-            intInput = intInput();
-            int phoneNo = intInput;
-
-            //Validering inden den opretter objektet
-            while(checkAnswers){
-                System.out.println("Er disse oplysninger korrekte? Y/N" + "\n" +
-                        "Fornavn: " + firstName + "\n" +
-                        "Efternavn: " + lastName + "\n" +
-                        "Telefon: " + phoneNo);
-
-                answer = stringInput();
-                if(answer.equalsIgnoreCase("Y")){
-                    Accountant accountant = new Accountant(firstName, lastName, phoneNo);
-                    arrayList.add(accountant);
-                    System.out.println("Bogholder tilføjet!");
-                    isRunning = false;
-                    checkAnswers = false;
-                } else if (answer.equalsIgnoreCase("N")) {
-                    System.out.println("Prøv igen!");
-                    checkAnswers = false;
-                } else {
-                    System.out.println("Error: Skriv Y eller N");
-                }
-            }
-        }
-
-    }
 
     public void registerMember(ArrayList<Member> members) {
         System.out.println("Enter your first name: ");
