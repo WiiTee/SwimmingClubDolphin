@@ -11,7 +11,7 @@ public class Competition {
 
 
     //Opretter Competition objekter
-    public Competition(String competitionTime, String memberID, String competitionName, LocalDate competitionDate, String discipline){
+    public Competition(String competitionTime, String competitionName, LocalDate competitionDate, String discipline, String memberID){
         this.competitionTime = competitionTime;
         this.memberID = memberID;
         this.competitionName = competitionName;

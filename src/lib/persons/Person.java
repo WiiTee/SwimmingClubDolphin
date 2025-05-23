@@ -51,6 +51,10 @@ public class Person {
         return phoneNumber;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String constructID(String firstName, String lastName){
         String subFirst = firstName.substring(0, 2);
         String subLast = lastName.substring(0, 2);
