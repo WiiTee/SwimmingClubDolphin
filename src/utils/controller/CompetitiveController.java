@@ -55,7 +55,7 @@ public class CompetitiveController implements IScannerInput{
 
                 System.out.println("Registrer hold");
                 for (Team team : teamList) {
-                    System.out.println("Holdnavn: " + team.getTeamName() + " Team ID: " + team.getTeamID());
+                    System.out.println("Holdnavn: " + team.getTeamName() + " Team ID: " + team.getTeamType());
                 }
                 System.out.println("Indtast Hold navn");
                 stringInput = stringInput();
@@ -74,14 +74,14 @@ public class CompetitiveController implements IScannerInput{
 
         System.out.println("Hvilket hold skal træneren tilføjes");
         for (Team team : teamList) {
-            System.out.println("Holdnavn: " + team.getTeamName() + " Hold ID: " + team.getTeamID());
+            System.out.println("Holdnavn: " + team.getTeamName() + " Hold ID: " + team.getTeamType());
         }
         System.out.println("Indtast Hold ID");
         stringInput = stringInput();
         teamIDStr = stringInput;
 
         for (Team team : teamList) {
-            if (teamIDStr.equalsIgnoreCase(team.getTeamID())) {
+            if (teamIDStr.equalsIgnoreCase(team.getTeamType())) {
                 System.out.println("Hvilken træner skal tilføjes?");
                 for (Trainer trainer : trainerList) {
                     System.out.println("Navn: " + trainer.getFirstName() +
@@ -103,59 +103,90 @@ public class CompetitiveController implements IScannerInput{
         System.out.println("Træner tilføjet!");
     }
 
-    public void registerTraining(ArrayList<Member> memberList){
-        for(Member member : memberList){
-            System.out.println("Navn: " + member.getFirstName() + " " + member.getLastName() + "\n" +
-                               "MedlemID: " + member.getId() + "\n" +
-                               "---------------------------------------------");
-        }
-        System.out.println("Vælg et medlemID fra overstående");
-        stringInput = stringInput();
-        String memberID = stringInput;
-        for(Member member : memberList){
-            int totalSeconds;
-
-            if(memberID.equals(member.getId())){
-                System.out.println("Indtast venligst dato for træningen i format; dd/mm/yyyy");
-
+    public void registerTraining(ArrayList<Member> memberList, ArrayList<Training> trainingList) {
+        if (!memberList.isEmpty()) {
+            for (Member member : memberList) {
+                System.out.println("Navn: " + member.getFirstName() + " " + member.getLastName() + "\n" +
+                        "MedlemID: " + member.getId() + "\n" +
+                        "---------------------------------------------");
+                System.out.println("Vælg et medlemID fra overstående");
                 stringInput = stringInput();
-                String date = stringInput.trim();
+                String memberID = stringInput;
+                for (Member member1 : memberList) {
+                    int totalSeconds;
 
-                String day = date.substring(0, 2);
-                String month = date.substring(3, 5);
-                String year = date.substring(6, 10);
+                    if (memberID.equals(member1.getId())) {
+                        System.out.println("Indtast venligst dato for træningen i format; dd/mm/yyyy");
 
-                int intDay = Integer.parseInt(day);
-                int intMonth = Integer.parseInt(month);
-                int intYear = Integer.parseInt(year);
+                        stringInput = stringInput();
+                        String date = stringInput.trim();
 
-                System.out.println("Indtast tiden for træning i format; mm:ss");
+                        String day = date.substring(0, 2);
+                        String month = date.substring(3, 5);
+                        String year = date.substring(6, 10);
 
-                stringInput = stringInput();
-                String time = stringInput.trim();
+                        int intDay = Integer.parseInt(day);
+                        int intMonth = Integer.parseInt(month);
+                        int intYear = Integer.parseInt(year);
 
-                String mm = time.substring(0, 2);
-                String ss = time.substring(3, 5);
+                        System.out.println("Indtast tiden for træning i format; mm:ss");
 
-                int intMM = Integer.parseInt(mm);
-                int intSS = Integer.parseInt(ss);
+                        stringInput = stringInput();
+                        String time = stringInput.trim();
 
-                totalSeconds = (intMM * 60) + intSS;
+                        String mm = time.substring(0, 2);
+                        String ss = time.substring(3, 5);
 
-                Training training = new Training(memberID,totalSeconds, LocalDate.of(intYear, intMonth, intDay));
+                        int intMM = Integer.parseInt(mm);
+                        int intSS = Integer.parseInt(ss);
 
-                //Hvis ArrayList<Training> har mindre end 5 entries bliver det bare tilføjet
-                if(member.getTrainingPerformance().size() < 5) {
-                    member.getTrainingPerformance().add(training);
-                } else {
-                    //Hvis ArrayList<Training> har 5 pladser, sorterer den ArrayListen finder den længste tid og erstatter den med den nye hvis den er mindre
-                    member.getTrainingPerformance().sort(Training::compareTo);
-                    if(member.getTrainingPerformance().getLast().getLapTime() > totalSeconds) {
-                        member.getTrainingPerformance().set(4, training);
+                        totalSeconds = (intMM * 60) + intSS;
+
+                        System.out.println("Indtast disciplin for træning");
+                        stringInput = stringInput();
+                        String discipline = stringInput;
+
+                        Training training = new Training(memberID, totalSeconds, LocalDate.of(intYear, intMonth, intDay), discipline);
+
+                        //Hvis ArrayList<Training> ikke har en disciplin allerede
+                        for (int z = 0; z < member1.getTrainingPerformance().size(); z++) {
+                            if (!member1.getTrainingPerformance().get(z).getDiscipline().equals(discipline)) {
+                                member1.getTrainingPerformance().add(training);
+                                trainingList.add(training);
+                                break;
+                            } else {
+                                //Hvis ArrayList<Training> i member har 5 pladser, sorterer den ArrayListen finder den længste tid og erstatter den med den nye hvis den er mindre
+                                member1.getTrainingPerformance().sort(Training::compareTo);
+                                for (int i = 0; i < member1.getTrainingPerformance().size(); i++) {
+                                    if (member1.getTrainingPerformance().get(i).getDiscipline().equals(discipline)) {
+                                        if (member1.getTrainingPerformance().get(i).getLapTime() > totalSeconds) {
+                                            member1.getTrainingPerformance().set(i, training);
+                                            break;
+                                        }
+                                    } else {
+                                        member1.getTrainingPerformance().add(training);
+                                        break;
+                                    }
+                                }
+                                //Tilføjer den til ArrayList<Training>
+                                for (int x = 0; x < trainingList.size(); x++) {
+                                    if (trainingList.get(x).getDiscipline().equals(discipline)) {
+                                        if (trainingList.get(x).getLapTime() > totalSeconds) {
+                                            trainingList.set(x, training);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    } else {
+                        System.out.println("Medlemmet eksisterer ikke!");
                     }
                 }
-                break;
             }
+        } else{
+            System.out.println("Der er ingen medlemmer!");
         }
     }
 
@@ -163,8 +194,7 @@ public class CompetitiveController implements IScannerInput{
     public String stringInput(){
         Scanner sc = new Scanner(System.in);
         try {
-            stringInput = sc.nextLine();
-            return stringInput;
+            return sc.nextLine();
 
         } catch (Exception e) {
             return "Error: No input was found! " + e;

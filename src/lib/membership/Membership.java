@@ -26,6 +26,10 @@ public class Membership {
         this.isActive = true;
     }
 
+    public Membership(String memberID){
+        this.memberID = memberID;
+    }
+
     //Sætter isActive
     public boolean isActive(){
         if(isActive){
@@ -35,7 +39,23 @@ public class Membership {
         }
     }
 
+    public MembershipType getMembershipType() {
+        return membershipType;
+    }
+
     public boolean getIsActive(){
         return isActive;
+    }
+
+    public String getMemberID() {
+        return memberID;
+    }
+
+    public void setMembershipType(MembershipType membershipType) {
+        this.membershipType = membershipType;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }

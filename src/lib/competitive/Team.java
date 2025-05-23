@@ -6,7 +6,7 @@ import lib.persons.Trainer;
 import java.util.ArrayList;
 
 public class Team {
-    private String teamID;
+    private String teamType;
     private String teamName;
     private ArrayList<Member> swimmers;
     private Trainer trainer;
@@ -19,8 +19,8 @@ public class Team {
         return teamName;
     }
 
-    public String getTeamID() {
-        return teamID;
+    public String getTeamType() {
+        return teamType;
     }
 
     public Trainer getTrainer() {

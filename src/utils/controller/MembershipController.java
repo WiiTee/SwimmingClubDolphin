@@ -5,6 +5,7 @@ import utils.interfaces.IScannerInput;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -69,12 +70,42 @@ public class MembershipController implements IScannerInput {
         }
     }
 
+    public void printSumOfpayment(ArrayList<Member> memberObjects) {
+        double sumOfPayments = 0.0;
+
+        try {
+            for (Member temp : memberObjects) {
+                double singlePayment = temp.getPayment().getPaymentAmount();
+                sumOfPayments += singlePayment;
+            }
+            System.out.println("Summen af indbetalinger ligger på nuværende tidspunkt på: " + sumOfPayments);
+        }
+        catch (Exception e){
+            System.out.println("Mistake happened at: " + e);
+        }
+    }
+
+    public void printRespectivePayment(ArrayList<Member> memberObjects) {
+        try {
+            System.out.println("Oversigt over de enkelte betalinger: n/________________________________________________________");
+
+            for (Member temp : memberObjects) {
+                double respectivePaymentAmount = temp.getPayment().getPaymentAmount();
+                String firstNameTemp = temp.getFirstName();
+                String lastNameTemp = temp.getLastName();
+
+                System.out.println("Amount: " + respectivePaymentAmount + ", from: " + lastNameTemp + ", " + firstNameTemp);
+            }
+        } catch (Exception e) {
+            System.out.println("Error occured at " + e);
+        }
+    }
+
     @Override
     public String stringInput(){
         Scanner sc = new Scanner(System.in);
         try {
-            stringInput = sc.nextLine();
-            return stringInput;
+            return sc.nextLine();
 
         } catch (Exception e) {
             return "Error: No input was found! " + e;
@@ -85,10 +116,9 @@ public class MembershipController implements IScannerInput {
     public int intInput(){
         Scanner sc = new Scanner(System.in);
         try {
-            intInput = sc.nextInt();
-            return intInput;
+            return sc.nextInt();
 
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Error: Not an int input! " + e);
             return -1;
         }

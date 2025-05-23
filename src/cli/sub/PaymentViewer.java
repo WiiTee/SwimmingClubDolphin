@@ -5,6 +5,7 @@ import utils.controller.MembershipController;
 import utils.interfaces.IScannerInput;
 import utils.interfaces.IViewer;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PaymentViewer implements IScannerInput, IViewer {
@@ -77,7 +78,7 @@ public class PaymentViewer implements IScannerInput, IViewer {
             intInput = sc.nextInt();
             return intInput;
 
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Error: Not an int input! " + e);
             return -1;
         }

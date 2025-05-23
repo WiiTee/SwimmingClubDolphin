@@ -18,18 +18,16 @@ public class Member extends Person {
     private ArrayList<Training> trainingPerformance;
     private ArrayList<Competition> competitionPerformance;
 
-    public Member(String firstName, String lastName, int phoneNumber, Membership membership, String address, LocalDate age){
+    public Member(String firstName, String lastName, int phoneNumber, String address, LocalDate age){
         super(firstName, lastName, phoneNumber);
         super.constructID(firstName, lastName);
-        this.membership = membership;
         this.address = address;
         this.age = age;
-        this.payment = new Payment(LocalDate.now(), age, getId());
     }
 
-    public Member(String firstName, String lastName, int phoneNumber, Membership membership, Team team,  String address, LocalDate age, Payment payment, ArrayList<String> disciplines){
+    public Member(String id, String firstName, String lastName, int phoneNumber, String address, LocalDate age){
         super(firstName, lastName, phoneNumber);
-        super.constructID(firstName, lastName);
+        super.setId(id);
         this.membership = membership;
         this.address = address;
         this.age = age;
@@ -59,5 +57,13 @@ public class Member extends Person {
 
     public void setDisciplines(ArrayList<String> disciplines) {
         this.disciplines = disciplines;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

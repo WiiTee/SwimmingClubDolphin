@@ -6,12 +6,14 @@ public class Training implements Comparable<Training>{
     private String memberID;
     private int lapTime;
     private LocalDate lapDate;
+    private String discipline;
 
     //Opretter træning objekter
-    public Training(String memberID, int lapTime, LocalDate lapDate){
+    public Training(String memberID, int lapTime, LocalDate lapDate, String discipline){
         this.memberID = memberID;
         this.lapTime = lapTime;
         this.lapDate = lapDate;
+        this.discipline = discipline;
     }
 
     public int getLapTime() {
@@ -24,6 +26,10 @@ public class Training implements Comparable<Training>{
 
     public String getMemberID() {
         return memberID;
+    }
+
+    public String getDiscipline() {
+        return discipline;
     }
 
     @Override

@@ -5,6 +5,7 @@ import utils.containers.ArrayContainer;
 import utils.interfaces.IScannerInput;
 import utils.interfaces.IViewer;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CompetitiveViewer implements IViewer, IScannerInput {
@@ -44,7 +45,7 @@ public class CompetitiveViewer implements IViewer, IScannerInput {
                 //Registrer svømmer
                 case 1 -> cc.addSwimmer(arrayContainer.getMemberList(), arrayContainer.getTeamList());
                 //Registrer træning
-                case 2 -> cc.registerTraining(arrayContainer.getMemberList());
+                case 2 -> cc.registerTraining(arrayContainer.getMemberList(), arrayContainer.getTrainingList());
                 //Registrer konkurrence
                 case 3 -> {}
                 //Registrer træner
@@ -73,7 +74,7 @@ public class CompetitiveViewer implements IViewer, IScannerInput {
             intInput = sc.nextInt();
             return intInput;
 
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Error: Not an int input! " + e);
             return -1;
         }

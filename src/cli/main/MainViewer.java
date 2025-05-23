@@ -7,11 +7,11 @@ import utils.interfaces.IViewer;
 import cli.sub.PaymentViewer;
 import cli.sub.RegistrationViewer;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MainViewer implements IScannerInput, IViewer {
     private boolean isActive = true;
-    private String stringInput;
     private int intInput;
 
     ArrayContainer arrayContainer = new ArrayContainer();
@@ -35,7 +35,11 @@ public class MainViewer implements IScannerInput, IViewer {
         System.out.println("""
                 ############################
                 #  Svømmeklubben Delfinen  #
-                ############################""");
+                ############################
+                """);
+
+        System.out.println("Now loading files, please hang on!");
+        arrayContainer.loadMember();
     }
 
     public void options(){
@@ -60,20 +64,24 @@ public class MainViewer implements IScannerInput, IViewer {
             //Betalingsmenu
             case 2 -> pc.menu(arrayContainer);
             //Medlemsoversigt
-//            TODO: implement "load" fn
             case 3 -> {}
             //Konkurrencesvømning menu
             case 4 -> cv.menu(arrayContainer);
             //Luk programmet
-            case 5 -> isActive = false;
+            case 5 -> {
+                arrayContainer.createFiles("memberlist.csv");
+                arrayContainer.createFiles("paymentlist.csv");
+                arrayContainer.createFiles("membershiplist.csv");
+
+                arrayContainer.save(arrayContainer.getMemberList());
+            }
         }
     }
 
     public String stringInput(){
         Scanner sc = new Scanner(System.in);
-        try {
-            stringInput = sc.nextLine();
-            return stringInput;
+        try {;
+            return sc.nextLine();
 
         } catch (Exception e) {
             return "Error: No input was found! " + e;
@@ -83,10 +91,9 @@ public class MainViewer implements IScannerInput, IViewer {
     public int intInput(){
         Scanner sc = new Scanner(System.in);
         try {
-            intInput = sc.nextInt();
-            return intInput;
+            return sc.nextInt();
 
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Error: Not an int input! " + e);
             return -1;
         }

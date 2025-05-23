@@ -5,6 +5,7 @@ import utils.controller.PersonsController;
 import utils.interfaces.IScannerInput;
 import utils.interfaces.IViewer;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RegistrationViewer implements IScannerInput, IViewer {
@@ -47,11 +48,15 @@ public class RegistrationViewer implements IScannerInput, IViewer {
 
         switch (intInput){
             //Registrer medlem
-            case 1 -> {}
+            case 1 -> rc.registerMember(arrayContainer.getMemberList());
             //Registrer træner
             case 2 -> {}
             //Registrer bogholder
-            case 3 -> rc.registerAccountant(arrayContainer.getAccountantList());
+            case 3 -> {
+                rc.registerAccountant(arrayContainer.getAccountantList());
+                //Test af bogholder!
+                //System.out.println(arrayContainer.getAccountantList().get(0).getFirstName());
+            }
             //Registrer hold
             case 4 -> {}
             //Tilbage
@@ -78,7 +83,7 @@ public class RegistrationViewer implements IScannerInput, IViewer {
             intInput = sc.nextInt();
             return intInput;
 
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Error: Not an int input! " + e);
             return -1;
         }
